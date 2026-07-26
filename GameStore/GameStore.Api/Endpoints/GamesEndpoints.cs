@@ -9,9 +9,9 @@ public static class GameEndpoints
     new (1, "Street  Fighter", "Fighting", 19.99M, new DateOnly(1992, 7, 15)),
     new (2, "Mortal Kombat", "Fighting", 29.99M, new DateOnly(1992, 8, 8)),
     new (3, "Tekken", "Fighting", 39.99M, new DateOnly(1994, 3, 18))
-];
+    ];
 
-public static void MapGamesEndpoints(this WebApplication app)
+    public static void MapGamesEndpoints(this WebApplication app)
     {
         //GET /games
         app.MapGet("/games", () => games);

@@ -1,29 +1,32 @@
 GET http://localhost:5041/games
 
 ###
-GET http://localhost:5041/games/5
+GET http://localhost:5041/games/2
 
 ###
 POST http://localhost:5041/games
 Content-Type: application/json
 
 {
-  "name": "Street Mario",
-  "genre": "Platformer",
-  "price": 59.99,
-  "releaseDate": "2023-08-30"
+  "name": "Test game",
+  "genreId": 1,
+  "price": 9.99,
+  "releaseDate": "1991-02-01"
 }
 
 ###
-PUT http://localhost:5041/games/1
+PUT http://localhost:5041/games/2
 Content-Type: application/json
 
 {
-    "name": "Street  Fighter II",
-    "genre": "Fighting",
-    "price": 9.99,
-    "releaseDate": "1992-07-15"
+    "name": "Street Fighter II Turbo",
+    "genreId": 1,
+    "price": 19.99,
+    "releaseDate": "1991-02-01"
 }
 
 ###
-DELETE http://localhost:5041/games/1
+DELETE http://localhost:5041/games/3
+
+###
+GET http://localhost:5041/genres

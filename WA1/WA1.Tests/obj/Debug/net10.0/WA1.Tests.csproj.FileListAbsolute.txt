@@ -1,0 +1,7 @@
+D:\Projects_demo\dotnet_dev\WA1\WA1.Tests\bin\Debug\net10.0\.msCoverageSourceRootsMapping_WA1.Tests
+D:\Projects_demo\dotnet_dev\WA1\WA1.Tests\bin\Debug\net10.0\CoverletSourceRootsMapping_WA1.Tests
+D:\Projects_demo\dotnet_dev\WA1\WA1.Tests\obj\Debug\net10.0\WA1.Tests.csproj.AssemblyReference.cache
+D:\Projects_demo\dotnet_dev\WA1\WA1.Tests\obj\Debug\net10.0\WA1.Tests.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects_demo\dotnet_dev\WA1\WA1.Tests\obj\Debug\net10.0\WA1.Tests.AssemblyInfoInputs.cache
+D:\Projects_demo\dotnet_dev\WA1\WA1.Tests\obj\Debug\net10.0\WA1.Tests.AssemblyInfo.cs
+D:\Projects_demo\dotnet_dev\WA1\WA1.Tests\obj\Debug\net10.0\WA1.Tests.csproj.CoreCompileInputs.cache

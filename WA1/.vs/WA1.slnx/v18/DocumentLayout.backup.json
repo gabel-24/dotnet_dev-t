@@ -1,0 +1,45 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects_demo\\dotnet_dev\\WA1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{31FD50D9-0D86-7EA6-6D6C-391DF5B63E2F}|WA1\\WA1.csproj|d:\\projects_demo\\dotnet_dev\\wa1\\wa1\\wa1.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{31FD50D9-0D86-7EA6-6D6C-391DF5B63E2F}|WA1\\WA1.csproj|solutionrelative:wa1\\wa1.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WA1.http",
+              "DocumentMoniker": "D:\\Projects_demo\\dotnet_dev\\WA1\\WA1\\WA1.http",
+              "RelativeDocumentMoniker": "WA1\\WA1.http",
+              "ToolTip": "D:\\Projects_demo\\dotnet_dev\\WA1\\WA1\\WA1.http",
+              "RelativeToolTip": "WA1\\WA1.http",
+              "ViewState": "AgIAACwAAAAAAAAAAAAswD8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-08-07T15:27:38.247Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

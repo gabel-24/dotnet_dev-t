@@ -1,0 +1,139 @@
+@WA1_HostAddress = http://localhost:5239
+
+GET {{WA1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+GET {{WA1_HostAddress}}/api/products
+Accept: application/json
+
+###
+
+GET {{WA1_HostAddress}}/api/students
+Accept: application/json
+
+###
+
+GET {{WA1_HostAddress}}/api/courses
+Accept: application/json
+
+###
+
+GET {{WA1_HostAddress}}/api/students/course/Accounting%20and%20Finance
+Accept: application/json
+
+###
+
+GET {{WA1_HostAddress}}/api/students?search=kevin
+Accept: application/json
+
+###
+
+POST {{WA1_HostAddress}}/api/students/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWJlbCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzg2MjkxNDMxLCJpc3MiOiJXQTEiLCJhdWQiOiJXQTFVc2VycyJ9.l9E7eTXrEElqMTSQuvuCLQayNJ4_-Yms_-JZtoZ7d7k
+
+
+
+{
+  "name" : "Gidudu",
+  "courseId" : 2,
+  "age" : 21,
+  "email": "A@gmail.com"
+}
+
+###
+
+POST {{WA1_HostAddress}}/api/students/addmany
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWJlbCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzg2MjkxNDMxLCJpc3MiOiJXQTEiLCJhdWQiOiJXQTFVc2VycyJ9.l9E7eTXrEElqMTSQuvuCLQayNJ4_-Yms_-JZtoZ7d7k
+
+
+
+[
+  {
+  "name" : "Gidudu",
+  "courseId" : 2,
+  "age" : 21,
+  "email": "A@gmail.com"
+  },
+  {
+    "name" : "Linda",
+    "courseid" : 1,
+    "age" : 25,
+    "email": "L@gmail.com"
+  },
+  {
+    "name" : "Kevin",
+    "courseid" : 3,
+    "age" : 20,
+    "email": "K@gmail.com"
+  }
+]
+
+###
+
+PUT {{WA1_HostAddress}}/api/students/
+Content-Type: application/json
+
+
+{
+  "Name": "Kevin",
+  "StudentClass": "Form 4"
+}
+
+###
+
+DELETE {{WA1_HostAddress}}/api/students/4
+
+###
+
+POST {{WA1_HostAddress}}/api/users/register
+Content-Type: application/json
+
+
+{
+  "username": "Abel",
+  "password": "abel123",
+  "role": "Admin"
+}
+
+###
+
+POST {{WA1_HostAddress}}/api/users/register/bulk
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWJlbCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzg2NDUyNjI1LCJpc3MiOiJXQTEiLCJhdWQiOiJXQTFVc2VycyJ9.ZDjw5CCn0AhosgjFaYIFT1bdLERs21rOsviRggD_U7Y
+
+
+[
+  {
+  "username": "Dr. Kasaazi",
+  "password": "Kas123",
+  "role": "Lecturer"
+  },
+  {
+  "username": "Dr. Paul",
+  "password": "Paul123",
+  "role": "Lecturer"
+  },{
+  "username": "Dr. Emma",
+  "password": "Emma123",
+  "role": "Lecturer"
+  }
+]
+
+###
+
+POST {{WA1_HostAddress}}/api/users/login
+Content-Type: application/json
+
+
+{
+  "username": "Abel",
+  "password": "abel123"
+}
+
+###
+
+GET {{WA1_HostAddress}}/api/users/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWJlbCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzg2NDUyNjI1LCJpc3MiOiJXQTEiLCJhdWQiOiJXQTFVc2VycyJ9.ZDjw5CCn0AhosgjFaYIFT1bdLERs21rOsviRggD_U7Y

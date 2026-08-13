@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-WA1",
+      "appliesTo": "WA1.Tests/",
+      "type": "launch"
+    }
+  ]
+}

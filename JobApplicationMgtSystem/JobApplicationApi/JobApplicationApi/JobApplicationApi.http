@@ -1,0 +1,11 @@
+@JobApplicationApi_HostAddress = http://localhost:5182
+
+GET {{JobApplicationApi_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{JobApplicationApi_HostAddress}}/todos/1
+Accept: application/json
+
+###

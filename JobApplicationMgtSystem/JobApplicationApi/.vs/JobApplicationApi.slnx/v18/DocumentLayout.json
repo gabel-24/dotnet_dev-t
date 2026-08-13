@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CCF274A1-8A1F-A5EB-D590-2B519E3BC24C}|JobApplicationApi\\JobApplicationApi.csproj|d:\\projects\\dotnet_dev-t\\jobapplicationmgtsystem\\jobapplicationapi\\jobapplicationapi\\models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCF274A1-8A1F-A5EB-D590-2B519E3BC24C}|JobApplicationApi\\JobApplicationApi.csproj|solutionrelative:jobapplicationapi\\models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCF274A1-8A1F-A5EB-D590-2B519E3BC24C}|JobApplicationApi\\JobApplicationApi.csproj|d:\\projects\\dotnet_dev-t\\jobapplicationmgtsystem\\jobapplicationapi\\jobapplicationapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCF274A1-8A1F-A5EB-D590-2B519E3BC24C}|JobApplicationApi\\JobApplicationApi.csproj|solutionrelative:jobapplicationapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Candidate.cs",
+              "DocumentMoniker": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi\\Models\\Candidate.cs",
+              "RelativeDocumentMoniker": "JobApplicationApi\\Models\\Candidate.cs",
+              "ToolTip": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi\\Models\\Candidate.cs",
+              "RelativeToolTip": "JobApplicationApi\\Models\\Candidate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T15:15:52.214Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:2:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
@@ -18,6 +40,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "JobApplicationApi\\Models\\ApplicationUser.cs",
+              "ToolTip": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "JobApplicationApi\\Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T14:11:54.327Z",
+              "EditorCaption": ""
             }
           ]
         }

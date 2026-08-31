@@ -62,5 +62,22 @@ namespace JobApplicationApi.Controllers
 
             return success == false ? NotFound() : NoContent();
         }
+
+        [Authorize(Roles = "Recruiter")]
+        [HttpDelete("interview-stages/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var recruiter = await _rservice.GetByUserIdAsync(userId!);
+
+            if (recruiter == null)
+            {
+                return NotFound("No recruiter profile found");
+            }
+
+            var success = await _service.DeleteAsync(recruiter.Id, id);
+
+            return success == false ? NotFound() : NoContent();
+        }
     }
 }

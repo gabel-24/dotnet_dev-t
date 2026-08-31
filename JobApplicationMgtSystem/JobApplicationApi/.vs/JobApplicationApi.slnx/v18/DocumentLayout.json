@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CCF274A1-8A1F-A5EB-D590-2B519E3BC24C}|JobApplicationApi\\JobApplicationApi.csproj|d:\\projects\\dotnet_dev-t\\jobapplicationmgtsystem\\jobapplicationapi\\jobapplicationapi\\models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CCF274A1-8A1F-A5EB-D590-2B519E3BC24C}|JobApplicationApi\\JobApplicationApi.csproj|solutionrelative:jobapplicationapi\\models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1F6F73D7-1C68-6DBA-EF9F-50374018D7E2}|JobApplicationApi.Tests\\JobApplicationApi.Tests.csproj|d:\\projects\\dotnet_dev-t\\jobapplicationmgtsystem\\jobapplicationapi\\jobapplicationapi.tests\\customwebapplicationfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F6F73D7-1C68-6DBA-EF9F-50374018D7E2}|JobApplicationApi.Tests\\JobApplicationApi.Tests.csproj|solutionrelative:jobapplicationapi.tests\\customwebapplicationfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CCF274A1-8A1F-A5EB-D590-2B519E3BC24C}|JobApplicationApi\\JobApplicationApi.csproj|d:\\projects\\dotnet_dev-t\\jobapplicationmgtsystem\\jobapplicationapi\\jobapplicationapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CCF274A1-8A1F-A5EB-D590-2B519E3BC24C}|JobApplicationApi\\JobApplicationApi.csproj|solutionrelative:jobapplicationapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1F6F73D7-1C68-6DBA-EF9F-50374018D7E2}|JobApplicationApi.Tests\\JobApplicationApi.Tests.csproj|d:\\projects\\dotnet_dev-t\\jobapplicationmgtsystem\\jobapplicationapi\\jobapplicationapi.tests\\inttests\\interviewstagesendpointstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F6F73D7-1C68-6DBA-EF9F-50374018D7E2}|JobApplicationApi.Tests\\JobApplicationApi.Tests.csproj|solutionrelative:jobapplicationapi.tests\\inttests\\interviewstagesendpointstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F6F73D7-1C68-6DBA-EF9F-50374018D7E2}|JobApplicationApi.Tests\\JobApplicationApi.Tests.csproj|d:\\projects\\dotnet_dev-t\\jobapplicationmgtsystem\\jobapplicationapi\\jobapplicationapi.tests\\inttests\\jobapplicationsendpointstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F6F73D7-1C68-6DBA-EF9F-50374018D7E2}|JobApplicationApi.Tests\\JobApplicationApi.Tests.csproj|solutionrelative:jobapplicationapi.tests\\inttests\\jobapplicationsendpointstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F6F73D7-1C68-6DBA-EF9F-50374018D7E2}|JobApplicationApi.Tests\\JobApplicationApi.Tests.csproj|d:\\projects\\dotnet_dev-t\\jobapplicationmgtsystem\\jobapplicationapi\\jobapplicationapi.tests\\inttests\\testhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F6F73D7-1C68-6DBA-EF9F-50374018D7E2}|JobApplicationApi.Tests\\JobApplicationApi.Tests.csproj|solutionrelative:jobapplicationapi.tests\\inttests\\testhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,14 +31,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Candidate.cs",
-              "DocumentMoniker": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi\\Models\\Candidate.cs",
-              "RelativeDocumentMoniker": "JobApplicationApi\\Models\\Candidate.cs",
-              "ToolTip": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi\\Models\\Candidate.cs",
-              "RelativeToolTip": "JobApplicationApi\\Models\\Candidate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA6AAAAAAAAAA==",
+              "Title": "CustomWebApplicationFactory.cs",
+              "DocumentMoniker": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi.Tests\\CustomWebApplicationFactory.cs",
+              "RelativeDocumentMoniker": "JobApplicationApi.Tests\\CustomWebApplicationFactory.cs",
+              "ToolTip": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi.Tests\\CustomWebApplicationFactory.cs",
+              "RelativeToolTip": "JobApplicationApi.Tests\\CustomWebApplicationFactory.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAcwBYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-13T15:15:52.214Z",
+              "WhenOpened": "2026-08-18T11:27:25.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InterviewStagesEndpointsTests.cs",
+              "DocumentMoniker": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi.Tests\\IntTests\\InterviewStagesEndpointsTests.cs",
+              "RelativeDocumentMoniker": "JobApplicationApi.Tests\\IntTests\\InterviewStagesEndpointsTests.cs",
+              "ToolTip": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi.Tests\\IntTests\\InterviewStagesEndpointsTests.cs",
+              "RelativeToolTip": "JobApplicationApi.Tests\\IntTests\\InterviewStagesEndpointsTests.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAB8AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-18T11:18:12.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JobApplicationsEndpointsTests.cs",
+              "DocumentMoniker": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi.Tests\\IntTests\\JobApplicationsEndpointsTests.cs",
+              "RelativeDocumentMoniker": "JobApplicationApi.Tests\\IntTests\\JobApplicationsEndpointsTests.cs",
+              "ToolTip": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi.Tests\\IntTests\\JobApplicationsEndpointsTests.cs",
+              "RelativeToolTip": "JobApplicationApi.Tests\\IntTests\\JobApplicationsEndpointsTests.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-18T11:16:35.138Z",
               "EditorCaption": ""
             },
             {
@@ -43,15 +77,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ApplicationUser.cs",
-              "DocumentMoniker": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi\\Models\\ApplicationUser.cs",
-              "RelativeDocumentMoniker": "JobApplicationApi\\Models\\ApplicationUser.cs",
-              "ToolTip": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi\\Models\\ApplicationUser.cs",
-              "RelativeToolTip": "JobApplicationApi\\Models\\ApplicationUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAvAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "TestHelpers.cs",
+              "DocumentMoniker": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi.Tests\\IntTests\\TestHelpers.cs",
+              "RelativeDocumentMoniker": "JobApplicationApi.Tests\\IntTests\\TestHelpers.cs",
+              "ToolTip": "D:\\Projects\\dotnet_dev-t\\JobApplicationMgtSystem\\JobApplicationApi\\JobApplicationApi.Tests\\IntTests\\TestHelpers.cs",
+              "RelativeToolTip": "JobApplicationApi.Tests\\IntTests\\TestHelpers.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowC8AAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-13T14:11:54.327Z",
+              "WhenOpened": "2026-08-18T10:20:16.063Z",
               "EditorCaption": ""
             }
           ]

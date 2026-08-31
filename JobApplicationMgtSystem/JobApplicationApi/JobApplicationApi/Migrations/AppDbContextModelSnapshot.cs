@@ -34,8 +34,8 @@ namespace JobApplicationApi.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("CreatedAt")
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -101,6 +101,7 @@ namespace JobApplicationApi.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Skills")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
@@ -123,21 +124,30 @@ namespace JobApplicationApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("Interviewer")
+                        .HasColumnType("longtext");
 
                     b.Property<int>("JobApplicationId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Location")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Notes")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("ScheduledAt")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly?>("ScheduledAt")
+                        .HasColumnType("date");
 
                     b.Property<string>("StageName")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -154,11 +164,8 @@ namespace JobApplicationApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AppliedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("CandidateId")
-                        .HasColumnType("int");
+                    b.Property<DateOnly>("AppliedAt")
+                        .HasColumnType("date");
 
                     b.Property<int>("CandidateProfileId")
                         .HasColumnType("int");
@@ -177,8 +184,6 @@ namespace JobApplicationApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CandidateId");
-
                     b.HasIndex("JobPostingId");
 
                     b.HasIndex("CandidateProfileId", "JobPostingId")
@@ -195,8 +200,8 @@ namespace JobApplicationApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("ClosingDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly?>("ClosingDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -211,8 +216,8 @@ namespace JobApplicationApi.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("PostedAt")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("PostedAt")
+                        .HasColumnType("date");
 
                     b.Property<int>("RecruiterId")
                         .HasColumnType("int");
@@ -415,7 +420,7 @@ namespace JobApplicationApi.Migrations
                 {
                     b.HasOne("JobApplicationApi.Models.Candidate", "Candidate")
                         .WithMany("Applications")
-                        .HasForeignKey("CandidateId")
+                        .HasForeignKey("CandidateProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

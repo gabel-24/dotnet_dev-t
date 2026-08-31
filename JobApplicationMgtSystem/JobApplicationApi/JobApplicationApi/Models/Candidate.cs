@@ -7,7 +7,7 @@
         public ApplicationUser User { get; set; } = null!;
 
         public string? ResumeUrl { get; set; }
-        public string? Skills { get; set; }
+        public List<string> Skills { get; set; } = new List<string>();
         public ICollection<JobApplication> Applications { get; set; } = new List<JobApplication>();
     }
 }

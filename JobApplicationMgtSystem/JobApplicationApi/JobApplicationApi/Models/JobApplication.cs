@@ -3,7 +3,7 @@
     public class JobApplication
     {
         public int Id { get; set; }
-        public DateTime AppliedAt { get; set; } = DateTime.UtcNow;
+        public DateOnly AppliedAt { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
         public ApplicationStatus Status { get; set; } = ApplicationStatus.Submitted;
         public string? CoverLetter { get; set; }
         public string? ResumeSnapshotUrl { get; set; }  // resume as it was at time of applying

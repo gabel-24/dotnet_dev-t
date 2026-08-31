@@ -9,8 +9,8 @@
         public string? EmploymentType { get; set; }   // Full-time, Part-time, Contract, etc.
         public decimal? SalaryMin { get; set; }
         public decimal? SalaryMax { get; set; }
-        public DateTime PostedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? ClosingDate { get; set; }
+        public DateOnly PostedAt { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
+        public DateOnly? ClosingDate { get; set; }
         public bool IsActive { get; set; } = true;
 
         // FK back to the recruiter who posted it

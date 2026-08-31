@@ -34,6 +34,26 @@ namespace JobApplicationApi.Data
             builder.Entity<JobApplication>()
                 .HasIndex(a => new { a.CandidateProfileId, a.JobPostingId })
                 .IsUnique();
+
+            // Store Candidate.Skills (List<string>) as a single comma-separated column
+            builder.Entity<Candidate>()
+                .Property(c => c.Skills)
+                .HasConversion(
+                    v => string.Join(',', v),
+                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
+                );
+
+            // Explicitly link JobApplication.Candidate via CandidateProfileId (prevents shadow FK)
+            builder.Entity<JobApplication>()
+                .HasOne(a => a.Candidate)
+                .WithMany(c => c.Applications)
+                .HasForeignKey(a => a.CandidateProfileId);
+
+            // Explicitly link JobApplication.JobPosting via JobPostingId
+            builder.Entity<JobApplication>()
+                .HasOne(a => a.JobPosting)
+                .WithMany(p => p.Applications)
+                .HasForeignKey(a => a.JobPostingId);
         }
     }
 }

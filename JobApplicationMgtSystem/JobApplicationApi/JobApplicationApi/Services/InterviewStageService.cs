@@ -19,10 +19,35 @@ namespace JobApplicationApi.Services
         }
 
         public async Task<List<InterviewStageDto>> GetByJobApplicationIdAsync(int jobApplicationId, string userId, bool isRecruiter)
-        {        
-            //not yet implemented userId and isRecruiter check, will implement later 
-            var interviewStages = await _repository.GetByJobApplicationIdAsync(jobApplicationId);
-            return _mapper.Map<List<InterviewStageDto>>(interviewStages);
+        {
+            var application = await _jarepository.GetByIdAsync(jobApplicationId);
+
+            if (application == null)
+                return new List<InterviewStageDto>();
+
+            if (isRecruiter)
+            {
+                if (application.JobPosting.Recruiter.UserId != userId)
+                    return new List<InterviewStageDto>();
+            }
+            else
+            {
+                if (application.Candidate.UserId != userId)
+                    return new List<InterviewStageDto>();
+            }
+
+            var stages = await _repository.GetByJobApplicationIdAsync(jobApplicationId);
+            var stageDtos = _mapper.Map<List<InterviewStageDto>>(stages);
+
+            if (!isRecruiter)
+            {
+                foreach (var dto in stageDtos)
+                {
+                    dto.Notes = null;
+                }
+            }
+
+            return stageDtos;
         }
         public async Task<InterviewStageDto?> CreateAsync(int recruiterId, int jobApplicationId, CreateInterviewStageDto request)
         {

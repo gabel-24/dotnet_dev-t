@@ -24,9 +24,12 @@ namespace JobApplicationApi.Controllers
         [HttpGet("jobapplications/{jobApplicationId}/interview-stages")]
         public async Task<IActionResult> GetByJobApplication(int jobApplicationId)
         {
-            var interviewStages = await _service.GetByJobApplicationIdAsync(jobApplicationId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isRecruiter = User.IsInRole("Recruiter");
 
-            return interviewStages == null ? NotFound() : Ok(interviewStages);
+            var interviewStages = await _service.GetByJobApplicationIdAsync(jobApplicationId, userId!, isRecruiter);
+
+            return Ok(interviewStages);
         }
 
         [Authorize(Roles = "Recruiter")]

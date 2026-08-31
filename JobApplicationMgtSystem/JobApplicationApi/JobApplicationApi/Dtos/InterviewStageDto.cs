@@ -14,4 +14,5 @@ namespace JobApplicationApi.Dtos
         public string Notes { get; set; } = string.Empty;
         public bool IsComplete { get; set; } = false;
     }
+    
 }

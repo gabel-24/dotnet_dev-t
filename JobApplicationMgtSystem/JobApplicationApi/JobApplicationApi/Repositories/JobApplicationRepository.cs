@@ -17,7 +17,7 @@ namespace JobApplicationApi.Repositories
         {
             return await _context.JobApplications
                 .Include(a => a.Candidate).ThenInclude(c => c.User)
-                .Include(a => a.JobPosting)
+                .Include(a => a.JobPosting).ThenInclude(jp => jp.Recruiter)
                 .Include(a => a.InterviewStages)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }

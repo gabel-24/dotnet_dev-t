@@ -1,13 +1,17 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
-import Register from './pages/Register'
+import Landing from './pages/Landing'
+import RegisterCandidate from './pages/RegisterCandidate'
+import RegisterRecruiter from './pages/RegisterRecruiter'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register/candidate" element={<RegisterCandidate />} />
+        <Route path="/register/recruiter" element={<RegisterRecruiter />} />
       </Routes>
     </BrowserRouter>
   )

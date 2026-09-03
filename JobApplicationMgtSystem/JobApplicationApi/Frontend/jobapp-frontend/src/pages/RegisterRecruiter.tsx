@@ -1,37 +1,36 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
 interface RegisterRecruiterRequest
 {
-    username: string
-    email: string
-    password: string
-    companyName: string
+  username: string
+  email: string
+  password: string
+  companyName: string
 }
 
 function RegisterRecruiter()
 {
-    const [formData, setFormData] = useState<RegisterRecruiterRequest>(
-    {
-        username: '',
-        email: '',
-        password: '',
-        companyName: '',
-    })
+  const [formData, setFormData] = useState<RegisterRecruiterRequest>(
+  {
+    username: '',
+    email: '',
+    password: '',
+    companyName: '',
+  })
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>)
-    {
-        const {name, value} = e.target
-        setFormData((prev) => ({...prev, [name]: value}))
-    }
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>)
+  {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
-    function handleSubmit(e: React.SubmitEvent)
-    {
-        e.preventDefault
+  function handleSubmit(e: React.FormEvent)
+  {
+    e.preventDefault()
+    console.log('Recruiter registration submitted:', formData)
+  }
 
-        console.log('Recruiter form submitted: ', formData)
-    }
-
-    return (
+  return (
     <div>
       <h1>Register as Recruiter</h1>
       <form onSubmit={handleSubmit}>

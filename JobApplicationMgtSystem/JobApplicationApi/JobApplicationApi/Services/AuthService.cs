@@ -41,7 +41,15 @@ public class AuthService : IAuthService
         var result = await _userManager.CreateAsync(user, request.Password);
 
         if (!result.Succeeded)
+        {
+            foreach (var error in result.Errors)
+            {
+                Console.WriteLine($"Identity error: {error.Code} - {error.Description}");
+            }
             return null;
+            
+        }
+            
 
         await _userManager.AddToRoleAsync(user, "Candidate");
 

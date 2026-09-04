@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { useAuth } from '../context/useAuth'
+import { useNavigate } from 'react-router-dom'
+import axiosClient from '../api/axiosClient'
 
 interface RegisterRecruiterRequest
 {
@@ -10,6 +13,9 @@ interface RegisterRecruiterRequest
 
 function RegisterRecruiter()
 {
+  const {login} = useAuth()
+  const navigate = useNavigate()
+  
   const [formData, setFormData] = useState<RegisterRecruiterRequest>(
   {
     username: '',
@@ -24,10 +30,43 @@ function RegisterRecruiter()
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  function handleSubmit(e: React.FormEvent)
+  async function handleSubmit(e: React.FormEvent)
   {
     e.preventDefault()
-    console.log('Recruiter registration submitted:', formData)
+    
+    await handleRegisterRecruiter(
+      {
+        userName: formData.username,
+        email: formData.email,
+        password: formData.password,
+        companyName: formData.companyName,
+      }
+    )
+
+  }
+
+  const handleRegisterRecruiter = async (data: 
+    {
+      userName: string
+      email: string
+      password: string
+      companyName: string
+    }
+  ) =>
+  {
+    try
+    {
+      const response = await axiosClient.post("/auth/register/recruiter", data)
+      const {token, userId, userName, role} = response.data
+
+      login ({userId, userName, role}, token)
+
+      navigate("/recruiter/dashboard")
+    }
+    catch(error)
+    {
+      console.error("Registration failed:", error)
+    }
   }
 
   return (

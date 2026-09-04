@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import axiosClient from '../api/axiosClient'
+import { useAuth } from '../context/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 interface RegisterCandidateRequest
 {
@@ -9,6 +12,9 @@ interface RegisterCandidateRequest
 
 function RegisterCandidate()
 {
+  const {login } = useAuth()
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState<RegisterCandidateRequest>(
   {
     username: '',
@@ -22,11 +28,38 @@ function RegisterCandidate()
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  function handleSubmit(e: React.FormEvent)
-  {
-    e.preventDefault()
-    console.log('Candidate registration submitted:', formData)
+  async function handleSubmit(e: React.FormEvent) {
+  e.preventDefault()
+  await handleRegisterCandidate({
+    userName: formData.username,
+    email: formData.email,
+    password: formData.password,
+  })
+}
+
+  const handleRegisterCandidate = async (data: {
+  userName: string;
+  email: string;
+  password: string;
+  headline?: string;
+  resumeUrl?: string;
+  skills?: string[];
+}) => {
+  try {
+    const response = await axiosClient.post("/auth/register/candidate", data);
+
+    const { token, userId, userName, role } = response.data;
+
+    login({ userId, userName, role }, token)
+
+    
+    navigate("/candidate/dashboard")
+
+  } catch (error) {
+    console.error("Registration failed:", error);
+    // next step: show an error message to the user
   }
+};
 
   return (
     <div>

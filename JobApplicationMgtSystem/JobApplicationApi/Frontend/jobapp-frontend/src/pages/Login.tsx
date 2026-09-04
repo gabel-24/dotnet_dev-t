@@ -1,11 +1,18 @@
 import { useState } from 'react'
+import axiosClient from '../api/axiosClient'
+import { useAuth } from '../context/useAuth'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 interface LoginRequest {
   email: string
   password: string
 }
 
-function Login() {
+function Login() 
+{
+  const {login} = useAuth()
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState<LoginRequest>({
     email: '',
     password: '',
@@ -16,10 +23,43 @@ function Login() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    console.log('Login form submitted:', formData)
+  
+
+
+  const handleLogin = async (data: { email: string; password: string }) => {
+    try {
+      const response = await axiosClient.post("/auth/login", data)
+
+      const { token, userId, userName, role } = response.data
+
+      login({ userId, userName, role }, token)
+
+      // next step: pass this into AuthContext's login() function
+
+      if(role === "Candidate")
+      {
+        navigate("/candidate/dashboard")
+      }
+      else if(role === "Recruiter")
+      {
+        navigate("/recruiter/dashboard")
+      }
+
+
+    } catch (error) {
+      console.error("Login failed:", error)
+    }
   }
+
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    await handleLogin({
+      email: formData.email,
+      password: formData.password,
+    })
+  }
+
 
   return (
     <div>
@@ -52,5 +92,4 @@ function Login() {
     </div>
   )
 }
-
 export default Login

@@ -86,4 +86,48 @@ public class RecruitersControllerTests
 
         Assert.IsType<NotFoundResult>(result);
     }
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public async Task GetById_ReturnsBadRequest_WithoutCallingService_WhenIdIsInvalid(int id)
+    {
+        var result = await _controller.GetById(id);
+
+        Assert.IsType<BadRequestObjectResult>(result);
+        _recruiterServiceMock.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task GetMe_ReturnsNotFound_WhenRecruiterMissing()
+    {
+        SetUser("user-1");
+        _recruiterServiceMock.Setup(s => s.GetByUserIdAsync("user-1"))
+            .ReturnsAsync((RecruiterDto?)null);
+
+        var result = await _controller.GetMe();
+
+        Assert.IsType<NotFoundResult>(result);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public async Task MeActions_ReturnUnauthorized_WithoutCallingService_WhenUserIdIsInvalid(string? userId)
+    {
+        var identity = new ClaimsIdentity("TestAuth");
+        if (userId != null)
+        {
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userId));
+        }
+
+        _controller.ControllerContext = new ControllerContext
+        {
+            HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal(identity) }
+        };
+
+        Assert.IsType<UnauthorizedResult>(await _controller.GetMe());
+        Assert.IsType<UnauthorizedResult>(await _controller.UpdateMe(new UpdateRecruiterDto()));
+        _recruiterServiceMock.VerifyNoOtherCalls();
+    }
 }

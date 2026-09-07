@@ -67,5 +67,20 @@ namespace JobApplicationApi.Controllers
 
             return success == false ? NotFound() : NoContent();
         }
+
+        [Authorize(Roles = "Recruiter")]
+        [HttpGet("/api/recruiters/me/postings")]
+        public async Task<IActionResult> GetMyPostings(int pageNumber = 1, int pageSize = 10)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var recruiter = await _rService.GetByUserIdAsync(userId!);
+
+            if (recruiter == null)
+                return NotFound("Recruiter profile not found.");
+
+            var result = await _service.GetByRecruiterAsync(recruiter.Id, pageNumber, pageSize);
+            return Ok(result);
+        }
+
     }
 }

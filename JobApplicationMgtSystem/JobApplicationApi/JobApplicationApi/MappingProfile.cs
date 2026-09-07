@@ -23,7 +23,9 @@ public class MappingProfile : Profile
         CreateMap<JobPosting, JobPostingDto>()
             .ForMember(dest => dest.ApplicationCount,
                        opt => opt.MapFrom(src => src.Applications.Count));
-        CreateMap<JobPosting, JobPostingSummaryDto>();
+        CreateMap<JobPosting, JobPostingSummaryDto>()
+            .ForMember(dest => dest.ApplicationCount,
+                        opt => opt.MapFrom(src => src.Applications.Count));
         CreateMap<CreateJobPostingDto, JobPosting>();
         CreateMap<UpdateJobPostingDto, JobPosting>();
 

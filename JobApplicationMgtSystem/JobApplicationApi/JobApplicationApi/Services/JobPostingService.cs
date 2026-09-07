@@ -62,4 +62,18 @@ public class JobPostingService : IJobPostingService
 
         return true;
     }
+
+    public async Task<PagedResponse<JobPostingSummaryDto>> GetByRecruiterAsync(int recruiterId, int pageNumber, int pageSize)
+    {
+        var (items, totalCount) = await _repository.GetByRecruiterPagedAsync(recruiterId, pageNumber, pageSize);
+
+        return new PagedResponse<JobPostingSummaryDto>
+        {
+            Items = _mapper.Map<List<JobPostingSummaryDto>>(items),
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
+        };
+    }
 }

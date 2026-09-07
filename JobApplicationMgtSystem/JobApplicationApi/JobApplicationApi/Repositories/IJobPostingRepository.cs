@@ -6,7 +6,7 @@ namespace JobApplicationApi.Repositories
     {
         Task<JobPosting?> GetByIdAsync(int id);
         Task<(List<JobPosting> Items, int TotalCount)> GetPagedAsync(int pageNumber, int pageSize, string? location, string? employmentType, string? keyword);
-        Task<List<JobPosting>> GetByRecruiterIdAsync(int recruiterId);
+        Task<(List<JobPosting> Items, int TotalCount)> GetByRecruiterPagedAsync(int recruiterId, int pageNumber, int pageSize);
         Task AddAsync(JobPosting jobPosting);
         Task UpdateAsync(JobPosting jobPosting);
     }

@@ -21,6 +21,7 @@ namespace JobApplicationApi.Repositories
         {
             var query = _context.JobPostings
                 .Include(j => j.Recruiter)
+                .Include(j => j.Applications)
                 .Where(j => j.IsActive);
 
             if (!string.IsNullOrWhiteSpace(location))
@@ -48,9 +49,22 @@ namespace JobApplicationApi.Repositories
 
             return (items, totalCount);
         }
-        public async Task<List<JobPosting>> GetByRecruiterIdAsync(int recruiterId)
+        public async Task<(List<JobPosting> Items, int TotalCount)> GetByRecruiterPagedAsync(int recruiterId, int pageNumber, int pageSize)
         {
-            return await _context.JobPostings.Where(j => j.RecruiterId == recruiterId).ToListAsync();
+            var query = _context.JobPostings
+                .Include(j => j.Recruiter)
+                .Include(j => j.Applications)
+                .Where(j => j.RecruiterId == recruiterId);
+
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .OrderByDescending(j => j.PostedAt)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (items, totalCount);
         }
         public async Task AddAsync(JobPosting jobPosting)
         {

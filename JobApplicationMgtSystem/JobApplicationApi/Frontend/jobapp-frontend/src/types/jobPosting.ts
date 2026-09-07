@@ -17,6 +17,7 @@ export interface JobPosting
 
 export interface JobPostingSummary
 {
+    id: number;
     title: string;
     location: string;
     employmentType: string;
@@ -24,4 +25,5 @@ export interface JobPostingSummary
     salaryMax: number;
     closingDate: string; // DateOnly → "YYYY-MM-DD"
     isActive: boolean;
+    applicationCount: number;
 }

@@ -4,8 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using JobApplicationApi.Dtos;
 
+
+
 namespace JobApplicationApi.Controllers
 {
+    [ApiController]
+    [Route("api/recruiters")]
     public class RecruiterController : Controller
     {
         private readonly IRecruiterService _service;

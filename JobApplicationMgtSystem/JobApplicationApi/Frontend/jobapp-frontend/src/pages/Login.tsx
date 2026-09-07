@@ -34,8 +34,6 @@ function Login()
 
       login({ userId, userName, role }, token)
 
-      // next step: pass this into AuthContext's login() function
-
       if(role === "Candidate")
       {
         navigate("/candidate/dashboard")

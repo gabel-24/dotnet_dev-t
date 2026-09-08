@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getMyPostings } from "../api/JobPostings";
-import type { JobPostingSummary } from "../types/jobPosting";
+import { getMyPostings } from "../../api/jobPostings";
+import type { JobPostingSummary } from "../../types/jobPosting";
 
 const RecruiterDashboard = () =>
 {

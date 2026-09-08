@@ -8,6 +8,7 @@ namespace JobApplicationApi.Services
         Task<PagedResponse<JobPostingSummaryDto>> GetPagedAsync(int pageNumber, int pageSize, string? location, string? employmentType, string? keyword);
         Task<JobPostingDto> CreateAsync(int recruiterId, CreateJobPostingDto request);
         Task<bool> UpdateAsync(int recruiterId, int jobPostingId, UpdateJobPostingDto request);
+        Task<bool> DeleteAsync(int recruiterId, int jobPostingId);
         Task<PagedResponse<JobPostingSummaryDto>> GetByRecruiterAsync(int recruiterId, int pageNumber, int pageSize);
     }
 }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getMyApplications} from "../api/JobApplications";
-import { getJobPostings } from "../api/JobPostings";
-import type { JobApplication } from "../types/jobApplication";
-import type { JobPosting } from "../types/jobPosting";
-import { applicationStatusLabels } from "../types/jobApplication";
+import { getMyApplications} from "../../api/jobApplications";
+import { getJobPostings } from "../../api/jobPostings";
+import type { JobApplication } from "../../types/jobApplication";
+import type { JobPosting } from "../../types/jobPosting";
+import { applicationStatusLabels } from "../../types/jobApplication";
 
 const CandidateDashboard = () => {
   const [applications, setApplications] = useState<JobApplication[]>([]);

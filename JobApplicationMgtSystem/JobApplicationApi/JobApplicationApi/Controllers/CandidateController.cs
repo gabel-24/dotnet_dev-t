@@ -55,9 +55,7 @@ public class CandidatesController : ControllerBase
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        var candidate = await _service.GetByUserIdAsync(userId);
-
-        var success = await _service.UpdateAsync(userId, request);
+        var success = await _service.UpdateAsync(userId!, request);
 
         if (!success)
         {

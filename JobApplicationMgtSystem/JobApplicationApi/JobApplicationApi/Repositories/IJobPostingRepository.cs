@@ -9,5 +9,6 @@ namespace JobApplicationApi.Repositories
         Task<(List<JobPosting> Items, int TotalCount)> GetByRecruiterPagedAsync(int recruiterId, int pageNumber, int pageSize);
         Task AddAsync(JobPosting jobPosting);
         Task UpdateAsync(JobPosting jobPosting);
+        Task DeleteAsync(JobPosting jobPosting);
     }
 }

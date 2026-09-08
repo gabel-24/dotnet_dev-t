@@ -76,4 +76,21 @@ public class JobPostingService : IJobPostingService
             TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
         };
     }
+
+    public async Task<bool> DeleteAsync(int recruiterId, int jobPostingId)
+    {
+        var jobPosting = await _repository.GetByIdAsync(jobPostingId);
+
+        if (jobPosting == null)
+            return false;
+
+        if (jobPosting.RecruiterId != recruiterId)
+            return false;
+
+        await _repository.DeleteAsync(jobPosting);
+
+        return true;
+    }
+
+
 }

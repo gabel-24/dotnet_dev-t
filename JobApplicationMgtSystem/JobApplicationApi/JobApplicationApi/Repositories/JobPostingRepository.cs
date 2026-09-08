@@ -76,5 +76,11 @@ namespace JobApplicationApi.Repositories
             _context.JobPostings.Update(jobPosting);
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(JobPosting jobPosting)
+        {
+            _context.JobPostings.Remove(jobPosting);
+            await _context.SaveChangesAsync();
+        }
     }
 }

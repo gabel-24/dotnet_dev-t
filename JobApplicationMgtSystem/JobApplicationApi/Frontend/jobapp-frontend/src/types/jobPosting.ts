@@ -27,3 +27,15 @@ export interface JobPostingSummary
     isActive: boolean;
     applicationCount: number;
 }
+
+export interface UpdateJobPostingDto 
+{
+  title: string;
+  description: string;
+  location: string;
+  employmentType: string;
+  salaryMin: number;
+  salaryMax: number;
+  closingDate: string; // DateOnly → "YYYY-MM-DD"
+  isActive: boolean;
+}

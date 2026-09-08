@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useAuth } from '../context/useAuth'
+import { useAuth } from '../../context/useAuth'
 import { useNavigate } from 'react-router-dom'
-import axiosClient from '../api/axiosClient'
+import axiosClient from '../../api/axiosClient'
 
 interface RegisterRecruiterRequest
 {

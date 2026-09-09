@@ -9,13 +9,16 @@ namespace JobApplicationApi.Services
     {
         private readonly IJobApplicationRepository _repository;
         private readonly IJobPostingRepository _jprepository;
+        private readonly ICandidateRepository _crepository;
         private readonly IMapper _mapper;
 
-        public JobApplicationService(IJobApplicationRepository repository, IJobPostingRepository jprepository, IMapper mapper)
+        public JobApplicationService(IJobApplicationRepository repository, IJobPostingRepository jprepository, ICandidateRepository crepository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
             _jprepository = jprepository;
+            _crepository = crepository;
+
         }
 
         public async Task<JobApplicationDto?> GetByIdAsync(int id)
@@ -66,8 +69,17 @@ namespace JobApplicationApi.Services
         }
         public async Task<JobApplicationDto> CreateAsync(int candidateId, CreateJobApplicationDto request)
         {
+            var candidate = await _crepository.GetByIdAsync(candidateId);
+
+            if(candidate == null)
+            {
+                throw new Exception("candidate not found");
+            }
+            
             var jobApplication = _mapper.Map<JobApplication>(request);
+
             jobApplication.CandidateProfileId = candidateId;
+            jobApplication.ResumeSnapshotUrl = candidate.ResumeUrl ?? string.Empty;
 
             await _repository.AddAsync(jobApplication);
 

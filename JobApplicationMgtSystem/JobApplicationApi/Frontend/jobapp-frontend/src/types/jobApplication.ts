@@ -14,6 +14,15 @@ export interface JobApplication
     interviewStages: InterviewStage[];
 }
 
+export interface JobApplicationSummary 
+{
+  id: number;
+  status: ApplicationStatus;
+  appliedAt: string;
+  candidateName: string;
+  jobTitle: string;
+}
+
 export const ApplicationStatus =
 {
     Submitted: 0,

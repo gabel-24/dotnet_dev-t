@@ -37,6 +37,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.JobTitle,
                        opt => opt.MapFrom(src => src.JobPosting.Title));
         CreateMap<CreateJobApplicationDto, JobApplication>();
+        CreateMap<UpdateJobApplicationDto, JobApplication>();
 
         // ===== InterviewStage =====
         CreateMap<InterviewStage, InterviewStageDto>();

@@ -39,3 +39,14 @@ export interface UpdateJobPostingDto
   closingDate: string; // DateOnly → "YYYY-MM-DD"
   isActive: boolean;
 }
+
+export interface CreateJobPostingDto 
+{
+  title: string;
+  description: string;
+  location: string;
+  employmentType: string;
+  salaryMin: number;
+  salaryMax: number;
+  closingDate: string; // ISO date string, e.g. "2026-12-31"
+}

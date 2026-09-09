@@ -10,10 +10,11 @@ import BrowsePostings from './pages/candidate/BrowsePostings'
 import CandidateProfile from './pages/candidate/CandidateProfile'
 import MyApplications from './pages/candidate/MyApplications'
 import MyPostings from './pages/recruiter/MyPostings'
-import CreatePostings from './pages/recruiter/CreatePostings'
+import CreatePostings from './pages/recruiter/CreateandEditPostings'
 import PostingApplications from './pages/recruiter/PostingApplications'
 import RecruiterProfile from './pages/recruiter/RecruiterProfile'
 import DashboardLayout from './layouts/DashboardLayout'
+import CreateApplications from './pages/candidate/CreateApplications'
 
 
 function App() {
@@ -63,6 +64,13 @@ function App() {
             } 
           />
 
+          <Route path="/candidate/postings/:id/apply" 
+            element=
+            {
+            <ProtectedRoute allowedRole="Candidate"><CreateApplications /></ProtectedRoute>
+            } 
+          />
+
           <Route path="/recruiter/postings" 
             element=
             {
@@ -90,6 +98,14 @@ function App() {
               <ProtectedRoute allowedRole="Recruiter"><RecruiterProfile /></ProtectedRoute>
             } 
           />
+        
+          <Route path="/recruiter/postings/:id/edit" 
+          element=
+          {
+          <ProtectedRoute allowedRole="Recruiter"><CreatePostings /></ProtectedRoute>
+          } 
+          />
+
         </Route>
 
       </Routes>

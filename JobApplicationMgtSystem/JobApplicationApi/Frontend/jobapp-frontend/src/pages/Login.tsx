@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axiosClient from '../api/axiosClient'
 import { useAuth } from '../context/useAuth'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 interface LoginRequest {
   email: string

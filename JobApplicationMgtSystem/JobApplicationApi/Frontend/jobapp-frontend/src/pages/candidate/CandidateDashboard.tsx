@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getMyApplications} from "../../api/jobApplications";
 import { getJobPostings } from "../../api/jobPostings";
-import type { JobApplication } from "../../types/jobApplication";
+import type { JobApplicationSummary} from "../../types/jobApplication";
 import type { JobPosting } from "../../types/jobPosting";
 import { applicationStatusLabels } from "../../types/jobApplication";
 
 const CandidateDashboard = () => {
-  const [applications, setApplications] = useState<JobApplication[]>([]);
+  const [applications, setApplications] = useState<JobApplicationSummary[]>([]);
   const [openPostings, setOpenPostings] = useState<JobPosting[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ const CandidateDashboard = () => {
           <ul>
             {applications.map((app) => (
               <li key={app.id}>
-                {app.jobPosting.title} — {applicationStatusLabels[app.status]}
+                {app.jobTitle} — {applicationStatusLabels[app.status]}
               </li>
             ))}
           </ul>

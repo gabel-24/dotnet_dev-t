@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getMyApplications } from '../../api/jobApplications';
-import type { JobApplication } from '../../types/jobApplication';
+import type { JobApplicationSummary } from '../../types/jobApplication';
 import { applicationStatusLabels } from '../../types/jobApplication';
 
 const MyApplications = () =>
 {
-    const [applications, setApplications] = useState<JobApplication[]>([]);
+    const [applications, setApplications] = useState<JobApplicationSummary[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -47,7 +47,7 @@ const MyApplications = () =>
             <ul>
                 {applications.map((app) => (
                 <li key={app.id}>
-                    <strong>{app.jobPosting.title}</strong>
+                    <strong>{app.jobTitle}</strong>
                     <br />
                     Status: {applicationStatusLabels[app.status]}
                     <br />

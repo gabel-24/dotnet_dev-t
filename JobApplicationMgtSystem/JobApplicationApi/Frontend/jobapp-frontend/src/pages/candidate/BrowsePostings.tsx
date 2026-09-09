@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { getJobPostings } from "../../api/jobPostings"
 import type { JobPosting } from "../../types/jobPosting"
+import { useNavigate } from "react-router-dom"
 
 const BrowsePostings = () =>
 {
+    const navigate = useNavigate();
     const [postings, setPostings] = useState<JobPosting[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -42,6 +44,7 @@ const BrowsePostings = () =>
         loadPostings()
     }, []);
 
+    
     const handleFilterSubmit = (e: React.FormEvent) =>
     {
         e.preventDefault();
@@ -50,8 +53,7 @@ const BrowsePostings = () =>
 
     const handleApply = (postingId: number) =>
     {
-        //TODO wireup once createApplications exists
-        alert('Apply clicked for posting ${postingId} (not yet implemented)');
+        navigate(`/candidate/postings/${postingId}/apply`);
     };
 
     return(

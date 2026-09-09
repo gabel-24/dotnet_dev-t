@@ -48,7 +48,7 @@ namespace JobApplicationApi.Controllers
         }
 
         [Authorize(Roles = "Recruiter")]
-        [HttpPut("jobapplications/{id}")]
+        [HttpPut("jobapplications/{id}/edit")]
         public async Task<IActionResult> UpdateStatus(int id, UpdateJobApplicationDto request)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

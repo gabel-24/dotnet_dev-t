@@ -6,7 +6,6 @@ const emptyForm: UpdateRecruiterDto =
 {
     username: '',
     companyName: '',
-    department: '',
 }
 
 const RecruiterProfile = () =>
@@ -34,7 +33,6 @@ const RecruiterProfile = () =>
                     {
                         username: data.username,
                         companyName: data.companyName,
-                        department: data.department,
                     }
                 );
             }
@@ -107,15 +105,6 @@ const RecruiterProfile = () =>
                 <input
                     name="companyName"
                     value={form.companyName}
-                    onChange={handleChange}
-                />
-                </label>
-                <br />
-                <label>
-                Department
-                <input
-                    name="department"
-                    value={form.department}
                     onChange={handleChange}
                 />
                 </label>

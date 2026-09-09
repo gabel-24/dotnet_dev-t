@@ -13,6 +13,5 @@ namespace JobApplicationApi.Dtos
         public string Password { get; set; } = string.Empty;
         [Required]
         public string CompanyName {  get; set; } =string.Empty;
-        public string Department { get; set; } = string.Empty;
     }
 }

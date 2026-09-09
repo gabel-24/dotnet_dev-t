@@ -4,19 +4,16 @@ export interface RecruiterDto
   username: string;
   email: string;
   companyName: string;
-  department: string;
 }
 
 export interface RecruiterSummary 
 {
   username: string;
   companyName: string;
-  department: string;
 }
 
 export interface UpdateRecruiterDto 
 {
   username: string;
   companyName: string;
-  department: string;
 }

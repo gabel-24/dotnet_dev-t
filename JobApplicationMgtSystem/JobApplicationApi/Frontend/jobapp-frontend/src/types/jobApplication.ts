@@ -19,6 +19,7 @@ export interface JobApplicationSummary
   id: number;
   status: ApplicationStatus;
   appliedAt: string;
+  resumeSnapshotUrl?: string | null;
   candidateName: string;
   jobTitle: string;
 }

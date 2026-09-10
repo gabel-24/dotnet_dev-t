@@ -5,6 +5,16 @@ import { getApplicationsForPosting, updateApplicationStatus } from '../../api/jo
 import { ApplicationStatus, applicationStatusLabels } from '../../types/jobApplication';
 import type { JobApplicationSummary } from '../../types/jobApplication';
 
+function getCvUrl(value?: string | null): string | null {
+    if (!value?.trim()) return null;
+    try {
+        const url = new URL(value.trim());
+        return url.protocol === 'https:' || url.protocol === 'http:' ? url.href : null;
+    } catch {
+        return null;
+    }
+}
+
 const PostingApplications = () =>
 {
     const { id } = useParams<{ id: string }>();
@@ -70,13 +80,23 @@ const PostingApplications = () =>
             )}
 
             <ul className="row-list">
-                {applications.map((app) => (
+                {applications.map((app) => {
+                    const cvUrl = getCvUrl(app.resumeSnapshotUrl);
+                    return (
                 <li key={app.id} className="row-item recruiter-row">
                     <div className="row-main">
                         <span className="row-title">{app.candidateName}</span>
                         <span className="row-meta">Applied {app.appliedAt}</span>
                     </div>
-                    <div className="row-side">
+                    <div className="row-side recruiter-actions">
+                    {cvUrl ? (
+                        <a className="btn btn-secondary" href={cvUrl} target="_blank" rel="noopener noreferrer"
+                            aria-label={`View CV for ${app.candidateName} (opens in a new tab)`}>
+                            View CV
+                        </a>
+                    ) : (
+                        <span className="row-meta">{app.resumeSnapshotUrl?.trim() ? 'CV link unavailable' : 'No CV submitted'}</span>
+                    )}
                     <div className="field">
                     <label htmlFor={`application-status-${app.id}`}>Status</label>
                     <select id={`application-status-${app.id}`}
@@ -94,7 +114,8 @@ const PostingApplications = () =>
                     </div>
                     </div>
                 </li>
-                ))}
+                );
+                })}
             </ul>
             <Pagination page={page} totalPages={totalPages} loading={loading} onChange={setPage} />
         </div>

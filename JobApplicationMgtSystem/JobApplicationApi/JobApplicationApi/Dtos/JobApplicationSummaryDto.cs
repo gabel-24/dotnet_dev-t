@@ -7,6 +7,7 @@ namespace JobApplicationApi.Dtos
         public int Id { get; set; }
         public ApplicationStatus Status { get; set; } = ApplicationStatus.Submitted;
         public DateOnly AppliedAt { get; set; }
+        public string? ResumeSnapshotUrl { get; set; }
         public string CandidateName { get; set; } = string.Empty;
         public string JobTitle { get; set; }=string.Empty;
     }

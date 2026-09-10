@@ -66,4 +66,22 @@ public class JobApplicationServiceTests
         Assert.Equal("Alice", recruiter.Username);
         Assert.Equal(user.Email, recruiter.Email);
     }
+    [Fact]
+    public async Task PostingApplicants_ReturnSubmittedCvOnlyToOwningRecruiter()
+    {
+        postings.Setup(r => r.GetByIdAsync(2)).ReturnsAsync(new JobPosting { RecruiterId = 5 });
+        applications.Setup(r => r.GetByJobPostingIdAsync(2, 1, 10)).ReturnsAsync((new List<JobApplication>
+        {
+            new() {
+                ResumeSnapshotUrl = "https://example.com/submitted-cv.pdf",
+                Candidate = new Candidate { ResumeUrl = "https://example.com/new-cv.pdf", User = new ApplicationUser() },
+                JobPosting = new JobPosting()
+            }
+        }, 1));
+
+        var result = await Service.GetByJobPostingAsync(5, 2, 1, 10);
+        Assert.Equal("https://example.com/submitted-cv.pdf", result.Items.Single().ResumeSnapshotUrl);
+        var denied = await Service.GetByJobPostingAsync(6, 2, 1, 10);
+        Assert.Empty(denied.Items);
+    }
 }

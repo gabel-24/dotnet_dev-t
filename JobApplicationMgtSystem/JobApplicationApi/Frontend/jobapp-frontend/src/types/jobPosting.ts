@@ -9,7 +9,7 @@ export interface JobPosting
   employmentType: string;
   salaryMin: number;
   salaryMax: number;
-  closingDate: string; // DateOnly → "YYYY-MM-DD"
+  closingDate: string | null; // DateOnly → "YYYY-MM-DD"
   isActive: boolean;
   recruiter: RecruiterSummary;
   applicationCount: number;
@@ -23,7 +23,7 @@ export interface JobPostingSummary
     employmentType: string;
     salaryMin: number;
     salaryMax: number;
-    closingDate: string; // DateOnly → "YYYY-MM-DD"
+    closingDate: string | null; // DateOnly → "YYYY-MM-DD"
     isActive: boolean;
     applicationCount: number;
 }
@@ -36,7 +36,7 @@ export interface UpdateJobPostingDto
   employmentType: string;
   salaryMin: number;
   salaryMax: number;
-  closingDate: string; // DateOnly → "YYYY-MM-DD"
+  closingDate: string | null; // DateOnly → "YYYY-MM-DD"
   isActive: boolean;
 }
 
@@ -48,5 +48,5 @@ export interface CreateJobPostingDto
   employmentType: string;
   salaryMin: number;
   salaryMax: number;
-  closingDate: string; // ISO date string, e.g. "2026-12-31"
+  closingDate: string | null; // ISO date string, e.g. "2026-12-31"
 }

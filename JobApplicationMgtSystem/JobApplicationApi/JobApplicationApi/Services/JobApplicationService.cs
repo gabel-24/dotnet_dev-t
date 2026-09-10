@@ -21,13 +21,23 @@ namespace JobApplicationApi.Services
 
         }
 
-        public async Task<JobApplicationDto?> GetByIdAsync(int id)
+        public async Task<JobApplicationDto?> GetByIdAsync(int id, string userId, bool isRecruiter)
         {
             var jobapplication = await _repository.GetByIdAsync(id);
-            return jobapplication == null ? null : _mapper.Map<JobApplicationDto>(jobapplication);
+            if (jobapplication == null || (isRecruiter
+                ? jobapplication.JobPosting.Recruiter.UserId != userId
+                : jobapplication.Candidate.UserId != userId))
+                return null;
+
+            var dto = _mapper.Map<JobApplicationDto>(jobapplication);
+            if (!isRecruiter)
+                foreach (var stage in dto.InterviewStages)
+                    stage.Notes = null;
+            return dto;
         }
         public async Task<PagedResponse<JobApplicationSummaryDto>> GetByCandidateAsync(int candidateId, int pageNumber, int pageSize)
         {
+            Pagination.Validate(pageNumber, pageSize);
             var (items, totalCount) = await _repository.GetByCandidateIdAsync(candidateId, pageNumber, pageSize);
 
             return new PagedResponse<JobApplicationSummaryDto>
@@ -42,6 +52,7 @@ namespace JobApplicationApi.Services
 
         public async Task<PagedResponse<JobApplicationSummaryDto>> GetByJobPostingAsync(int recruiterId, int jobPostingId, int pageNumber, int pageSize)
         {
+            Pagination.Validate(pageNumber, pageSize);
             var jobPosting = await _jprepository.GetByIdAsync(jobPostingId);
 
             if (jobPosting == null || jobPosting.RecruiterId != recruiterId)
@@ -73,9 +84,17 @@ namespace JobApplicationApi.Services
 
             if(candidate == null)
             {
-                throw new Exception("candidate not found");
+                throw new BadHttpRequestException("Candidate not found.", StatusCodes.Status404NotFound);
             }
             
+            var posting = await _jprepository.GetByIdAsync(request.JobPostingId);
+            if (posting == null)
+                throw new BadHttpRequestException("Job posting not found.", StatusCodes.Status404NotFound);
+            if (!posting.IsActive || posting.ClosingDate < DateOnly.FromDateTime(DateTime.UtcNow))
+                throw new BadHttpRequestException("This job posting is closed.");
+            if (await _repository.ExistsAsync(candidateId, request.JobPostingId))
+                throw new BadHttpRequestException("You have already applied to this job.", StatusCodes.Status409Conflict);
+
             var jobApplication = _mapper.Map<JobApplication>(request);
 
             jobApplication.CandidateProfileId = candidateId;
@@ -87,6 +106,8 @@ namespace JobApplicationApi.Services
         }
         public async Task<bool> UpdateStatusAsync(int recruiterId, int jobApplicationId, UpdateJobApplicationDto request)
         {
+            if (!Enum.IsDefined(request.Status))
+                throw new BadHttpRequestException("Invalid application status.");
             var jobApplication = await _repository.GetByIdAsync(jobApplicationId);
 
             if(jobApplication == null)

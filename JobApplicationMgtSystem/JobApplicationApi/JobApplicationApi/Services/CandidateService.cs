@@ -7,11 +7,13 @@ public class CandidateService : ICandidateService
 {
     private readonly ICandidateRepository _repository;
     private readonly IMapper _mapper;
+    private readonly Microsoft.AspNetCore.Identity.UserManager<JobApplicationApi.Models.ApplicationUser> _userManager;
 
-    public CandidateService(ICandidateRepository candidateRepository, IMapper mapper)
+    public CandidateService(ICandidateRepository candidateRepository, IMapper mapper, Microsoft.AspNetCore.Identity.UserManager<JobApplicationApi.Models.ApplicationUser> userManager)
     {
         _repository = candidateRepository;
         _mapper = mapper;
+        _userManager = userManager;
     }
 
     public async Task<CandidateDto?> GetByIdAsync(int id)
@@ -33,6 +35,12 @@ public class CandidateService : ICandidateService
         if (candidate == null)
             return false;
 
+        if (candidate.User.UserName != request.Username)
+        {
+            var result = await _userManager.SetUserNameAsync(candidate.User, request.Username);
+            if (!result.Succeeded)
+                throw new BadHttpRequestException(string.Join(" ", result.Errors.Select(e => e.Description)));
+        }
         _mapper.Map(request, candidate);
         await _repository.UpdateInfoAsync(candidate);
 

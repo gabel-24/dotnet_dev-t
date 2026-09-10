@@ -1,3 +1,4 @@
+import Pagination from "../../components/Pagination";
 import { useEffect, useState } from "react"
 import { getJobPostings } from "../../api/jobPostings"
 import type { JobPosting } from "../../types/jobPosting"
@@ -9,7 +10,10 @@ const BrowsePostings = () =>
     const [postings, setPostings] = useState<JobPosting[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
+    const [filters, setFilters] = useState<{keyword?: string; location?: string; employmentType?: string}>({});
     const [keyword, setKeyword] = useState('');
     const [location, setLocation] = useState('');
     const [employmentType, setEmploymentType] = useState('');
@@ -21,13 +25,10 @@ const BrowsePostings = () =>
 
         try
         {
-            const response = await getJobPostings(1, 10,
-                {
-                    keyword: keyword || undefined,
-                    location: location || undefined,
-                    employmentType: employmentType || undefined,
-                });
+            const response = await getJobPostings(page, 10,
+                filters);
             setPostings(response.items);
+            setTotalPages(response.totalPages);
         }
         catch(err)
         {
@@ -42,13 +43,14 @@ const BrowsePostings = () =>
     useEffect(() =>
     {
         loadPostings()
-    }, []);
+    }, [page, filters]);
 
     
     const handleFilterSubmit = (e: React.FormEvent) =>
     {
         e.preventDefault();
-        loadPostings();
+        setPage(1);
+        setFilters({keyword: keyword || undefined, location: location || undefined, employmentType: employmentType || undefined});
     };
 
     const handleApply = (postingId: number) =>
@@ -96,6 +98,7 @@ const BrowsePostings = () =>
                 </li>
                 ))}
             </ul>
+            <Pagination page={page} totalPages={totalPages} loading={loading} onChange={setPage} />
         </div>
     )
 }

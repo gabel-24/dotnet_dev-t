@@ -34,15 +34,18 @@ namespace JobApplicationApi.Controllers
                 return NotFound("Candidate doesnt exist");
             }
 
+            request.JobPostingId = jobPostingId;
             var jobApplication = await _service.CreateAsync(candidate!.Id, request);
             return Ok(jobApplication);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Candidate,Recruiter")]
         [HttpGet("jobapplications/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var jobApplication = await _service.GetByIdAsync(id);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrWhiteSpace(userId)) return Unauthorized();
+            var jobApplication = await _service.GetByIdAsync(id, userId, User.IsInRole("Recruiter"));
 
             return jobApplication == null ? NotFound() : Ok(jobApplication);
         }

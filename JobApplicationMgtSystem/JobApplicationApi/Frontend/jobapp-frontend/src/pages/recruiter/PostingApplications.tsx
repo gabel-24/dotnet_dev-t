@@ -1,3 +1,4 @@
+import Pagination from "../../components/Pagination";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getApplicationsForPosting, updateApplicationStatus } from '../../api/jobApplications';
@@ -10,6 +11,8 @@ const PostingApplications = () =>
     const [applications, setApplications] = useState<JobApplicationSummary[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     const loadApplications = async () =>
     {
@@ -20,8 +23,9 @@ const PostingApplications = () =>
 
         try
         {
-            const response = await getApplicationsForPosting(Number(id),1,10)
-            setApplications(response.items)
+            const response = await getApplicationsForPosting(Number(id),page,10)
+            setApplications(response.items);
+            setTotalPages(response.totalPages);
         }
         catch(err)
         {
@@ -36,7 +40,7 @@ const PostingApplications = () =>
     useEffect(()=>
     {
         loadApplications();
-    }, [id]);
+    }, [id, page]);
 
     const handleStatusChange = async (applicationId: number, newStatus: ApplicationStatus) =>
     {
@@ -85,6 +89,7 @@ const PostingApplications = () =>
                 </li>
                 ))}
             </ul>
+            <Pagination page={page} totalPages={totalPages} loading={loading} onChange={setPage} />
         </div>
     );
 

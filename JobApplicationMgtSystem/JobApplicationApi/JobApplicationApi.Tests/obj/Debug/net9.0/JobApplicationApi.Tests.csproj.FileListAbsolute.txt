@@ -896,3 +896,7 @@ D:/Projects/dotnet_dev-t/JobApplicationMgtSystem/JobApplicationApi/JobApplicatio
 /media/gabel/New Volume/Projects/dotnet_dev-t/JobApplicationMgtSystem/JobApplicationApi/JobApplicationApi.Tests/obj/Debug/net9.0/JobApplicationApi.Tests.pdb
 /media/gabel/New Volume/Projects/dotnet_dev-t/JobApplicationMgtSystem/JobApplicationApi/JobApplicationApi.Tests/obj/Debug/net9.0/JobApplicationApi.Tests.genruntimeconfig.cache
 /media/gabel/New Volume/Projects/dotnet_dev-t/JobApplicationMgtSystem/JobApplicationApi/JobApplicationApi.Tests/obj/Debug/net9.0/ref/JobApplicationApi.Tests.dll
+/media/gabel/New Volume/Projects/dotnet_dev-t/JobApplicationMgtSystem/JobApplicationApi/JobApplicationApi.Tests/bin/Debug/net9.0/Microsoft.OpenApi.dll
+/media/gabel/New Volume/Projects/dotnet_dev-t/JobApplicationMgtSystem/JobApplicationApi/JobApplicationApi.Tests/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+/media/gabel/New Volume/Projects/dotnet_dev-t/JobApplicationMgtSystem/JobApplicationApi/JobApplicationApi.Tests/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/media/gabel/New Volume/Projects/dotnet_dev-t/JobApplicationMgtSystem/JobApplicationApi/JobApplicationApi.Tests/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll

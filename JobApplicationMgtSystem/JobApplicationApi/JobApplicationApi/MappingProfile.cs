@@ -8,14 +8,20 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         // ===== Candidate =====
-        CreateMap<Candidate, CandidateDto>();
-        CreateMap<Candidate, CandidateSummaryDto>();
+        CreateMap<Candidate, CandidateDto>()
+            .ForMember(d => d.Username, o => o.MapFrom(s => s.User.UserName))
+            .ForMember(d => d.Email, o => o.MapFrom(s => s.User.Email));
+        CreateMap<Candidate, CandidateSummaryDto>()
+            .ForMember(d => d.Username, o => o.MapFrom(s => s.User.UserName));
         CreateMap<RegisterCandidateDto, Candidate>();
         CreateMap<UpdateCandidateDto, Candidate>();
 
         // ===== Recruiter =====
-        CreateMap<Recruiter, RecruiterDto>();
-        CreateMap<Recruiter, RecruiterSummaryDto>();
+        CreateMap<Recruiter, RecruiterDto>()
+            .ForMember(d => d.Username, o => o.MapFrom(s => s.User.UserName))
+            .ForMember(d => d.Email, o => o.MapFrom(s => s.User.Email));
+        CreateMap<Recruiter, RecruiterSummaryDto>()
+            .ForMember(d => d.Username, o => o.MapFrom(s => s.User.UserName));
         CreateMap<RegisterRecruiterDto, Recruiter>();
         CreateMap<UpdateRecruiterDto, Recruiter>();
 

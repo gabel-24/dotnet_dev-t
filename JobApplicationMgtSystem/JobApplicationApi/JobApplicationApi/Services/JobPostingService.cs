@@ -24,6 +24,7 @@ public class JobPostingService : IJobPostingService
     public async Task<PagedResponse<JobPostingSummaryDto>> GetPagedAsync(
         int pageNumber, int pageSize, string? location, string? employmentType, string? keyword)
     {
+            Pagination.Validate(pageNumber, pageSize);
         var (items, totalCount) = await _repository.GetPagedAsync(
             pageNumber, pageSize, location, employmentType, keyword);
 
@@ -65,6 +66,7 @@ public class JobPostingService : IJobPostingService
 
     public async Task<PagedResponse<JobPostingSummaryDto>> GetByRecruiterAsync(int recruiterId, int pageNumber, int pageSize)
     {
+            Pagination.Validate(pageNumber, pageSize);
         var (items, totalCount) = await _repository.GetByRecruiterPagedAsync(recruiterId, pageNumber, pageSize);
 
         return new PagedResponse<JobPostingSummaryDto>

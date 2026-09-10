@@ -33,7 +33,8 @@ public class InterviewStagesControllerTests
     public async Task GetByJobApplication_ReturnsOk_WithList()
     {
         var stages = new List<InterviewStageDto>();
-        _serviceMock.Setup(s => s.GetByJobApplicationIdAsync(1)).ReturnsAsync(stages);
+        SetUser("user-1");
+        _serviceMock.Setup(s => s.GetByJobApplicationIdAsync(1, "user-1", false)).ReturnsAsync(stages);
 
         var result = await _controller.GetByJobApplication(1);
 

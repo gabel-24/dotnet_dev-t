@@ -46,7 +46,7 @@ public class JobApplicationControllerTests
     {
         SetUser("user-1");
         var candidate = new CandidateDto { Id = 3 };
-        var request = new CreateJobApplicationDto();
+        var request = new CreateJobApplicationDto { JobPostingId = 99 };
         var created = new JobApplicationDto { Id = 7 };
 
         _cServiceMock.Setup(s => s.GetByUserIdAsync("user-1")).ReturnsAsync(candidate);
@@ -56,12 +56,14 @@ public class JobApplicationControllerTests
 
         var okResult = Assert.IsType<OkObjectResult>(result);
         Assert.Equal(created, okResult.Value);
+        Assert.Equal(1, request.JobPostingId);
     }
 
     [Fact]
     public async Task GetById_ReturnsNotFound_WhenMissing()
     {
-        _serviceMock.Setup(s => s.GetByIdAsync(1)).ReturnsAsync((JobApplicationDto?)null);
+        SetUser("user-1");
+        _serviceMock.Setup(s => s.GetByIdAsync(1, "user-1", false)).ReturnsAsync((JobApplicationDto?)null);
 
         var result = await _controller.GetById(1);
 

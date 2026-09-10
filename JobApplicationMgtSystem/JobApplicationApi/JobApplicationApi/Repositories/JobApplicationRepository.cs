@@ -64,12 +64,26 @@ namespace JobApplicationApi.Repositories
         public async Task AddAsync(JobApplication jobApplication)
         {
             _context.JobApplications.Add(jobApplication);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex) when (ex.InnerException is MySqlConnector.MySqlException { Number: 1062 })
+            {
+                throw new BadHttpRequestException("You have already applied to this job.", StatusCodes.Status409Conflict);
+            }
         }
         public async Task UpdateAsync(JobApplication jobApplication)
         {
             _context.JobApplications.Update(jobApplication);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex) when (ex.InnerException is MySqlConnector.MySqlException { Number: 1062 })
+            {
+                throw new BadHttpRequestException("You have already applied to this job.", StatusCodes.Status409Conflict);
+            }
         }
     }
 }

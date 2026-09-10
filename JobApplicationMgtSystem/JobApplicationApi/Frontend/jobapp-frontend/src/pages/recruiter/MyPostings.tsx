@@ -1,3 +1,4 @@
+import Pagination from "../../components/Pagination";
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getMyPostings } from '../../api/jobPostings';
@@ -9,6 +10,8 @@ const MyPostings = () =>
     const [postings, setPostings] = useState<JobPostingSummary[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     const loadPostings = async () =>
     {
@@ -17,8 +20,9 @@ const MyPostings = () =>
 
         try
         {
-            const response = await getMyPostings(1,10);
+            const response = await getMyPostings(page,10);
             setPostings(response.items);
+            setTotalPages(response.totalPages);
         }
         catch(err)
         {
@@ -33,7 +37,7 @@ const MyPostings = () =>
     useEffect(() =>
     {
         loadPostings();
-    }, []);
+    }, [page]);
 
     const handleDelete = async (id: number) =>
     {
@@ -43,7 +47,8 @@ const MyPostings = () =>
         try
         {
             await deleteJobPosting(id);
-            setPostings((prev) => prev.filter((p) => p.id !== id));
+            if (postings.length === 1 && page > 1) setPage(page - 1);
+            else await loadPostings();
         }
         catch(err)
         {
@@ -76,6 +81,7 @@ const MyPostings = () =>
                 </li>
                 ))}
             </ul>
+            <Pagination page={page} totalPages={totalPages} loading={loading} onChange={setPage} />
         </div>
     );
 

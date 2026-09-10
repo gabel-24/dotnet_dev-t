@@ -107,7 +107,7 @@ public class JobApplicationsEndpointsTests : IClassFixture<CustomWebApplicationF
         TestHelpers.AttachToken(_client, recruiterToken);
 
         var updateDto = await _client.PutAsJsonAsync(
-            $"/api/jobapplications/{application!.Id}",
+            $"/api/jobapplications/{application!.Id}/edit",
             new UpdateJobApplicationDto { Status = ApplicationStatus.Interview });
 
         Assert.Equal(HttpStatusCode.NoContent, updateDto.StatusCode);

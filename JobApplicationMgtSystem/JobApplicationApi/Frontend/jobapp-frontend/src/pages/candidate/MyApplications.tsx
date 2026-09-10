@@ -1,3 +1,4 @@
+import Pagination from "../../components/Pagination";
 import { useEffect, useState } from 'react';
 import { getMyApplications } from '../../api/jobApplications';
 import type { JobApplicationSummary } from '../../types/jobApplication';
@@ -8,6 +9,8 @@ const MyApplications = () =>
     const [applications, setApplications] = useState<JobApplicationSummary[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() =>
     {
@@ -18,8 +21,9 @@ const MyApplications = () =>
             
             try
             {
-                const response = await getMyApplications(1,10);
+                const response = await getMyApplications(page,10);
                 setApplications(response.items);
+                setTotalPages(response.totalPages);
             }
             catch(err)
             {
@@ -32,7 +36,7 @@ const MyApplications = () =>
         };
 
         loadApplications();
-    }, []);
+    }, [page]);
 
     return(
         <div>
@@ -55,6 +59,7 @@ const MyApplications = () =>
                 </li>
                 ))}
             </ul>
+            <Pagination page={page} totalPages={totalPages} loading={loading} onChange={setPage} />
         </div>
     );
 };

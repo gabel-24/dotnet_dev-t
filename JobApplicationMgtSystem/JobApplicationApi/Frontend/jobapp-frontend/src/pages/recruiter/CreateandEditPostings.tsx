@@ -47,7 +47,7 @@ const CreateandEditPostings = () =>
                         employmentType: posting.employmentType,
                         salaryMin: posting.salaryMin,
                         salaryMax: posting.salaryMax,
-                        closingDate: posting.closingDate,
+                        closingDate: posting.closingDate ?? '',
                         isActive: posting.isActive,
                     }
                 );
@@ -93,13 +93,13 @@ const CreateandEditPostings = () =>
         {
             if(isEditMode && id)
             {
-                const updateData: UpdateJobPostingDto = {... form};
+                const updateData: UpdateJobPostingDto = {...form, closingDate: form.closingDate || null};
                 await updateJobPosting(Number(id), updateData);
             }
             else
             {
                 const { isActive, ... createData} = form;
-                const createDto: CreateJobPostingDto = createData;
+                const createDto: CreateJobPostingDto = {...createData, closingDate: createData.closingDate || null};
                 await createJobPosting(createDto);
             }
 
@@ -154,7 +154,7 @@ const CreateandEditPostings = () =>
                 <br />
                 <label>
                     Closing Date
-                    <input type="date" name="closingDate" value={form.closingDate} onChange={handleChange} />
+                    <input type="date" name="closingDate" value={form.closingDate ?? ""} onChange={handleChange} />
                 </label>
                 <br />
                 {isEditMode && (

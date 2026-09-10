@@ -57,6 +57,7 @@ public class AuthService : IAuthService
         {
             UserId = user.Id,
             ResumeUrl = request.ResumeUrl,
+            Headline = request.Headline,
             Skills = request.Skills
         };
 

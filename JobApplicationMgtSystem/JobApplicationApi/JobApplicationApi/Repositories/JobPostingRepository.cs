@@ -15,14 +15,18 @@ namespace JobApplicationApi.Repositories
 
         public async Task<JobPosting?> GetByIdAsync(int id)
         {
-            return await _context.JobPostings.FindAsync(id);
+            return await _context.JobPostings
+                .Include(j => j.Recruiter).ThenInclude(r => r.User)
+                .Include(j => j.Applications)
+                .FirstOrDefaultAsync(j => j.Id == id);
         }
         public async Task<(List<JobPosting> Items, int TotalCount)> GetPagedAsync(int pageNumber, int pageSize, string? location, string? employmentType, string? keyword)
         {
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
             var query = _context.JobPostings
-                .Include(j => j.Recruiter)
+                .Include(j => j.Recruiter).ThenInclude(r => r.User)
                 .Include(j => j.Applications)
-                .Where(j => j.IsActive);
+                .Where(j => j.IsActive && (j.ClosingDate == null || j.ClosingDate >= today));
 
             if (!string.IsNullOrWhiteSpace(location))
             {
@@ -52,7 +56,7 @@ namespace JobApplicationApi.Repositories
         public async Task<(List<JobPosting> Items, int TotalCount)> GetByRecruiterPagedAsync(int recruiterId, int pageNumber, int pageSize)
         {
             var query = _context.JobPostings
-                .Include(j => j.Recruiter)
+                .Include(j => j.Recruiter).ThenInclude(r => r.User)
                 .Include(j => j.Applications)
                 .Where(j => j.RecruiterId == recruiterId);
 

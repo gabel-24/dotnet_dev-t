@@ -57,27 +57,30 @@ const MyPostings = () =>
     };
 
     return(
-        <div>
-            <h2>My Job Postings</h2>
-            <Link to="/recruiter/postings/new">Create New Posting</Link>
+        <div className="page">
+            <div className="page-header recruiter-page-header">
+                <h2>My Job Postings</h2>
+                <Link className="btn btn-primary" to="/recruiter/postings/new">Create New Posting</Link>
+            </div>
 
-            {loading && <p>Loading postings...</p>}
-            {error && <p>{error}</p>}
+            {loading && <p className="state-message">Loading postings...</p>}
+            {error && <p className="state-message is-error">{error}</p>}
             {!loading && !error && postings.length === 0 && (
-                <p>You haven't posted any jobs yet.</p>
+                <div className="empty-state">You haven't posted any jobs yet.</div>
             )}
 
-            <ul>
+            <ul className="row-list">
                 {postings.map((posting) => (
-                <li key={posting.id}>
-                    <strong>{posting.title}</strong> — {posting.applicationCount} applicant
-                    {posting.applicationCount !== 1 ? 's' : ''}
-                    <br />
-                    <Link to={`/recruiter/postings/${posting.id}/applications`}>View Applicants</Link>
-                    {' | '}
-                    <Link to={`/recruiter/postings/${posting.id}/edit`}>Edit</Link>
-                    {' | '}
-                    <button onClick={() => handleDelete(posting.id)}>Delete</button>
+                <li key={posting.id} className="row-item recruiter-row">
+                    <div className="row-main">
+                        <span className="row-title">{posting.title}</span>
+                        <span className="row-meta">{posting.applicationCount} applicant{posting.applicationCount !== 1 ? 's' : ''}</span>
+                    </div>
+                    <div className="row-side recruiter-actions">
+                        <Link className="btn btn-secondary" to={`/recruiter/postings/${posting.id}/applications`}>View Applicants</Link>
+                        <Link className="btn btn-secondary" to={`/recruiter/postings/${posting.id}/edit`}>Edit</Link>
+                        <button className="btn btn-secondary btn-danger" onClick={() => handleDelete(posting.id)}>Delete</button>
+                    </div>
                 </li>
                 ))}
             </ul>

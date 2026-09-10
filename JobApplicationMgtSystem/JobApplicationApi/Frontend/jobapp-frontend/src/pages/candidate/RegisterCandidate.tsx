@@ -16,11 +16,11 @@ function RegisterCandidate()
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState<RegisterCandidateRequest>(
-  {
-    username: '',
-    email: '',
-    password: '',
-  })
+    {
+      username: '',
+      email: '',
+      password: '',
+    })
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>)
   {
@@ -29,43 +29,42 @@ function RegisterCandidate()
   }
 
   async function handleSubmit(e: React.FormEvent) {
-  e.preventDefault()
-  await handleRegisterCandidate({
-    userName: formData.username,
-    email: formData.email,
-    password: formData.password,
-  })
-}
+    e.preventDefault()
+    await handleRegisterCandidate({
+      userName: formData.username,
+      email: formData.email,
+      password: formData.password,
+    })
+  }
 
   const handleRegisterCandidate = async (data: {
-  userName: string;
-  email: string;
-  password: string;
-  headline?: string;
-  resumeUrl?: string;
-  skills?: string[];
-}) => {
-  try {
-    const response = await axiosClient.post("/auth/register/candidate", data);
+    userName: string;
+    email: string;
+    password: string;
+    headline?: string;
+    resumeUrl?: string;
+    skills?: string[];
+  }) => {
+    try {
+      const response = await axiosClient.post("/auth/register/candidate", data);
 
-    const { token, userId, userName, role } = response.data;
+      const { token, userId, userName, role } = response.data;
 
-    login({ userId, userName, role }, token)
+      login({ userId, userName, role }, token)
 
-    
-    navigate("/candidate/dashboard")
+      navigate("/candidate/dashboard")
 
-  } catch (error) {
-    console.error("Registration failed:", error);
-    // next step: show an error message to the user
-  }
-};
+    } catch (error) {
+      console.error("Registration failed:", error);
+      // next step: show an error message to the user
+    }
+  };
 
   return (
-    <div>
+    <div className="page page-narrow">
       <h1>Register as Candidate</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="field">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -76,7 +75,7 @@ function RegisterCandidate()
             required
           />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -86,7 +85,7 @@ function RegisterCandidate()
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -97,7 +96,7 @@ function RegisterCandidate()
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className="btn btn-primary">Register</button>
       </form>
     </div>
   )

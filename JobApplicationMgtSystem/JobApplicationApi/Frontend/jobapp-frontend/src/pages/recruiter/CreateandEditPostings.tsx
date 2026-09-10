@@ -115,56 +115,48 @@ const CreateandEditPostings = () =>
         }
     };
 
-    if(loading) return <p>Loading posting....</p>
+    if(loading) return <p className="state-message">Loading posting....</p>
 
     return(
-        <div>
+        <div className="page page-narrow">
             <h2>{isEditMode ? 'Edit Posting' : 'Create New Posting'}</h2>
-            {error && <p>{error}</p>}
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Title
-                    <input name='title' value ={form.title} onChange={handleChange} required />
-                </label>
-                <br />
-                <label>
-                    Description
-                    <textarea name = "description" value={form.description} onChange={handleChange} required />
-                </label>
-                <br />
-                <label>
-                    Location
-                    <input name ='location' value={form.location} onChange={handleChange} />
-                </label>
-                <br />
-                <label>
-                    Employment Type
-                    <input name='employmentType' value={form.employmentType} onChange={handleChange} />
-                </label>
-                <br />
-                <label>
-                    Salary Min
-                    <input type="number" name="salaryMin" value={form.salaryMin} onChange={handleChange} />
-                </label>
-                <br />
-                <label>
-                    Salary Max
-                    <input type="number" name="salaryMax" value={form.salaryMax} onChange={handleChange} />
-                </label>
-                <br />
-                <label>
-                    Closing Date
-                    <input type="date" name="closingDate" value={form.closingDate ?? ""} onChange={handleChange} />
-                </label>
-                <br />
+            {error && <p className="state-message is-error">{error}</p>}
+            <form onSubmit={handleSubmit} className="auth-form">
+                <div className="field">
+                    <label htmlFor="recruiter-title">Title</label>
+                    <input id="recruiter-title" name='title' value ={form.title} onChange={handleChange} required />
+                </div>
+                <div className="field">
+                    <label htmlFor="recruiter-description">Description</label>
+                    <textarea id="recruiter-description" name = "description" value={form.description} onChange={handleChange} required />
+                </div>
+                <div className="field">
+                    <label htmlFor="recruiter-location">Location</label>
+                    <input id="recruiter-location" name ='location' value={form.location} onChange={handleChange} />
+                </div>
+                <div className="field">
+                    <label htmlFor="recruiter-employmentType">Employment Type</label>
+                    <input id="recruiter-employmentType" name='employmentType' value={form.employmentType} onChange={handleChange} />
+                </div>
+                <div className="field">
+                    <label htmlFor="recruiter-salaryMin">Salary Min</label>
+                    <input id="recruiter-salaryMin" type="number" name="salaryMin" value={form.salaryMin} onChange={handleChange} />
+                </div>
+                <div className="field">
+                    <label htmlFor="recruiter-salaryMax">Salary Max</label>
+                    <input id="recruiter-salaryMax" type="number" name="salaryMax" value={form.salaryMax} onChange={handleChange} />
+                </div>
+                <div className="field">
+                    <label htmlFor="recruiter-closingDate">Closing Date</label>
+                    <input id="recruiter-closingDate" type="date" name="closingDate" value={form.closingDate ?? ""} onChange={handleChange} />
+                </div>
                 {isEditMode && (
-                    <label>
-                        Active
-                        <input type="checkbox" name="isActive" checked={form.isActive} onChange={handleChange} />
-                    </label>
+                    <div className="field field-checkbox">
+                        <input id="recruiter-isActive" type="checkbox" name="isActive" checked={form.isActive} onChange={handleChange} />
+                        <label htmlFor="recruiter-isActive">Active</label>
+                    </div>
                 )}
-                <br />
-                <button type='submit' disabled = {saving}>
+                <button className="btn btn-primary" type='submit' disabled = {saving}>
                     {saving ? 'Saving.....' : isEditMode ? 'Updating Posting' : 'Create Posting'}
                 </button>
             </form>

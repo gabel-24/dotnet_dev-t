@@ -60,21 +60,26 @@ const PostingApplications = () =>
     };
 
     return(
-        <div>
-            <h2>Applicants{applications[0] ? ` for ${applications[0].jobTitle}` : ''}</h2>
+        <div className="page">
+            <div className="page-header"><h2>Applicants{applications[0] ? ` for ${applications[0].jobTitle}` : ''}</h2></div>
 
-            {loading && <p>Loading applications...</p>}
-            {error && <p>{error}</p>}
+            {loading && <p className="state-message">Loading applications...</p>}
+            {error && <p className="state-message is-error">{error}</p>}
             {!loading && !error && applications.length === 0 && (
-                <p>No applications yet for this posting.</p>
+                <div className="empty-state">No applications yet for this posting.</div>
             )}
 
-            <ul>
+            <ul className="row-list">
                 {applications.map((app) => (
-                <li key={app.id}>
-                    <strong>{app.candidateName}</strong> — applied {app.appliedAt}
-                    <br />
-                    <select
+                <li key={app.id} className="row-item recruiter-row">
+                    <div className="row-main">
+                        <span className="row-title">{app.candidateName}</span>
+                        <span className="row-meta">Applied {app.appliedAt}</span>
+                    </div>
+                    <div className="row-side">
+                    <div className="field">
+                    <label htmlFor={`application-status-${app.id}`}>Status</label>
+                    <select id={`application-status-${app.id}`}
                     value={app.status}
                     onChange={(e) =>
                         handleStatusChange(app.id, Number(e.target.value) as ApplicationStatus)
@@ -86,6 +91,8 @@ const PostingApplications = () =>
                         </option>
                     ))}
                     </select>
+                    </div>
+                    </div>
                 </li>
                 ))}
             </ul>

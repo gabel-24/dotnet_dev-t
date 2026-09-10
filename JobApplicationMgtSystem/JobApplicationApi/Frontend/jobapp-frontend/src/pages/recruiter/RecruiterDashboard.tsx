@@ -30,24 +30,30 @@ const RecruiterDashboard = () =>
         loadPostings();
     }, []);
 
-    if(loading) return <p>Loading Dashboard.....</p>
-    if(error) return <p>{error}</p>
+    if(loading) return <p className="state-message">Loading Dashboard.....</p>
+    if(error) return <p className="state-message is-error">{error}</p>
 
     return (
-        <div>
+        <div className="page">
+            <section className="section">
             <h2>My Job Postings</h2>
             {postings.length === 0 ? (
-                <p>You haven't posted any jobs yet.</p>
+                <div className="empty-state">You haven't posted any jobs yet.</div>
             ) : (
-                <ul>
+                <ul className="row-list">
                 {postings.map((posting) => (
-                    <li key={posting.id}>
-                    {posting.title} — {posting.applicationCount} applicant
-                    {posting.applicationCount !== 1 ? "s" : ""}
+                    <li key={posting.id} className="row-item">
+                    <div className="row-main">
+                        <span className="row-title">{posting.title}</span>
+                    </div>
+                    <div className="row-side">
+                        <span className="row-meta">{posting.applicationCount} applicant{posting.applicationCount !== 1 ? "s" : ""}</span>
+                    </div>
                     </li>
                 ))}
                 </ul>
             )}
+            </section>
         </div>
     );
 }

@@ -18,7 +18,6 @@ const MyApplications = () =>
         {
             setLoading(true);
             setError('')
-            
             try
             {
                 const response = await getMyApplications(page,10);
@@ -39,24 +38,30 @@ const MyApplications = () =>
     }, [page]);
 
     return(
-        <div>
-            <h2>My Applications</h2>
+        <div className="page">
+            <div className="page-header">
+                <h2>My Applications</h2>
+            </div>
 
-            {loading && <p>Loading applications...</p>}
-            {error && <p>{error}</p>}
+            {loading && <p className="state-message">Loading applications...</p>}
+            {error && <p className="state-message is-error">{error}</p>}
             {!loading && !error && applications.length === 0 && (
-                <p>You haven't applied to anything yet.</p>
+                <div className="empty-state">You haven't applied to anything yet — browse open roles.</div>
             )}
 
-            <ul>
+            <ul className="row-list">
                 {applications.map((app) => (
-                <li key={app.id}>
-                    <strong>{app.jobTitle}</strong>
-                    <br />
-                    Status: {applicationStatusLabels[app.status]}
-                    <br />
-                    Applied: {app.appliedAt}
-                </li>
+                    <li key={app.id} className="row-item">
+                        <div className="row-main">
+                            <span className="row-title">{app.jobTitle}</span>
+                            <span className="row-meta">Applied {app.appliedAt}</span>
+                        </div>
+                        <div className="row-side">
+                            <span className="status-pill" data-status={app.status}>
+                                {applicationStatusLabels[app.status]}
+                            </span>
+                        </div>
+                    </li>
                 ))}
             </ul>
             <Pagination page={page} totalPages={totalPages} loading={loading} onChange={setPage} />

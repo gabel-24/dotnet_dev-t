@@ -36,25 +36,26 @@ const CreateApplications = () =>
     }
 
     return (
-        <div>
+        <div className="page page-narrow">
             <h2>Apply to Posting</h2>
-            {error && <p>{error}</p>}
-            <form onSubmit={handleSubmit}>
-                <label>
-                Cover Letter
-                <textarea
-                    value={coverLetter}
-                    onChange={(e) => setCoverLetter(e.target.value)}
-                    rows={8}
-                />
-                </label>
-                <br />
-                <button type="submit" disabled={submitting}>
-                {submitting ? 'Submitting...' : 'Submit Application'}
-                </button>
-                <button type="button" onClick={() => navigate('/candidate/postings')} disabled={submitting}>
-                Cancel
-                </button>
+            {error && <p className="state-message is-error">{error}</p>}
+            <form onSubmit={handleSubmit} className="auth-form">
+                <div className="field">
+                    <label>Cover Letter</label>
+                    <textarea
+                        value={coverLetter}
+                        onChange={(e) => setCoverLetter(e.target.value)}
+                        rows={8}
+                    />
+                </div>
+                <div className="form-actions">
+                    <button type="submit" className="btn btn-primary" disabled={submitting}>
+                        {submitting ? 'Submitting...' : 'Submit Application'}
+                    </button>
+                    <button type="button" className="btn btn-secondary" onClick={() => navigate('/candidate/postings')} disabled={submitting}>
+                        Cancel
+                    </button>
+                </div>
             </form>
         </div>
     )

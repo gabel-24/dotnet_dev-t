@@ -9,6 +9,7 @@ const CandidateProfile = () =>
     const [error, setError] = useState('');
     const [saving, setSaving] = useState(false);
     const [saveMessage, setSaveMessage] = useState('');
+    const [saveSucceeded, setSaveSucceeded] = useState(false);
 
     const [username, setUsername] = useState('');
     const [headline, setHeadline] = useState('');
@@ -59,10 +60,12 @@ const CandidateProfile = () =>
                 .filter((s) => s.length > 0);
 
             await updateMyProfile({username, headline, resumeUrl, skills});
+            setSaveSucceeded(true);
             setSaveMessage('profile updated successfully. ');
         }
         catch(err)
         {
+            setSaveSucceeded(false);
             setSaveMessage('failed to update profile. ');
         }
         finally
@@ -71,41 +74,43 @@ const CandidateProfile = () =>
         }
     };
 
-    if (loading) return <p>Loading profile...</p>;
-    if (error) return <p>{error}</p>;
+    if (loading) return <p className="state-message">Loading profile...</p>;
+    if (error) return <p className="state-message is-error">{error}</p>;
     if (!profile) return null;
 
     return (
-        <div>
+        <div className="page page-narrow">
             <h2>My Profile</h2>
             {/* <p>Email: {profile.email}</p> */}
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                <label>Username</label>
-                <input value={username} onChange={(e) => setUsername(e.target.value)} />
+            <form onSubmit={handleSubmit} className="auth-form">
+                <div className="field">
+                    <label>Username</label>
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} />
                 </div>
 
-                <div>
-                <label>Headline</label>
-                <input value={headline} onChange={(e) => setHeadline(e.target.value)} />
+                <div className="field">
+                    <label>Headline</label>
+                    <input value={headline} onChange={(e) => setHeadline(e.target.value)} />
                 </div>
 
-                <div>
-                <label>Resume URL</label>
-                <input value={resumeUrl} onChange={(e) => setResumeUrl(e.target.value)} />
+                <div className="field">
+                    <label>Resume URL</label>
+                    <input value={resumeUrl} onChange={(e) => setResumeUrl(e.target.value)} />
                 </div>
 
-                <div>
-                <label>Skills (comma-separated)</label>
-                <input value={skillsInput} onChange={(e) => setSkillsInput(e.target.value)} />
+                <div className="field">
+                    <label>Skills (comma-separated)</label>
+                    <input value={skillsInput} onChange={(e) => setSkillsInput(e.target.value)} />
                 </div>
 
-                <button type="submit" disabled={saving}>
-                {saving ? 'Saving...' : 'Save Changes'}
+                <button type="submit" className="btn btn-primary" disabled={saving}>
+                    {saving ? 'Saving...' : 'Save Changes'}
                 </button>
 
-                {saveMessage && <p>{saveMessage}</p>}
+                {saveMessage && (
+                    <p className={`form-note ${saveSucceeded ? 'is-success' : 'is-error'}`}>{saveMessage}</p>
+                )}
             </form>
         </div>
     );

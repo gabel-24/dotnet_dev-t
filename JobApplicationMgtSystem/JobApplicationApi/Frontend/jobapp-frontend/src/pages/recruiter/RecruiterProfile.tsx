@@ -78,38 +78,36 @@ const RecruiterProfile = () =>
         }
     }
 
-    if(loading) return <p>Loading.....</p>
-    if(!profile && error) return <p>{error}</p>
+    if(loading) return <p className="state-message">Loading.....</p>
+    if(!profile && error) return <p className="state-message is-error">{error}</p>
 
     return(
-        <div>
+        <div className="page page-narrow">
             <h2>Recruiter Profile</h2>
-            {profile && <p>Email: {profile.email}</p>}
+            {profile && <p className="muted">Email: {profile.email}</p>}
 
-            {error && <p>{error}</p>}
-            {success && <p>Profile updated.</p>}
+            {error && <p className="state-message is-error">{error}</p>}
+            {success && <p className="form-note is-success">Profile updated.</p>}
 
-            <form onSubmit={handleSubmit}>
-                <label>
-                Username
-                <input
+            <form onSubmit={handleSubmit} className="auth-form">
+                <div className="field">
+                    <label htmlFor="recruiter-username">Username</label>
+                    <input id="recruiter-username"
                     name="username"
                     value={form.username}
                     onChange={handleChange}
                     required
                 />
-                </label>
-                <br />
-                <label>
-                Company Name
-                <input
+                </div>
+                <div className="field">
+                    <label htmlFor="recruiter-companyName">Company Name</label>
+                    <input id="recruiter-companyName"
                     name="companyName"
                     value={form.companyName}
                     onChange={handleChange}
                 />
-                </label>
-                <br />
-                <button type="submit" disabled={saving}>
+                </div>
+                <button className="btn btn-primary" type="submit" disabled={saving}>
                 {saving ? 'Saving...' : 'Update Profile'}
                 </button>
             </form>

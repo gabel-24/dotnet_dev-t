@@ -1,0 +1,498 @@
+/* ============================================================
+   Candidate-facing pages
+   Extends the existing root tokens (--text, --accent, --border,
+   --bg, --shadow, --sans, --heading). No new typeface, no new
+   color language — just filling in what was missing.
+   ============================================================ */
+
+:root {
+  --status-submitted: #8b93a6;
+  --status-review: var(--accent);
+  --status-interview: #c98a3f;
+  --status-accepted: #4f9d6e;
+  --status-declined: #b5637a;
+
+  --status-submitted-bg: rgba(139, 147, 166, 0.12);
+  --status-interview-bg: rgba(201, 138, 63, 0.12);
+  --status-accepted-bg: rgba(79, 157, 110, 0.12);
+  --status-declined-bg: rgba(181, 99, 122, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --status-submitted: #9aa2b5;
+    --status-interview: #dba566;
+    --status-accepted: #6fbf8e;
+    --status-declined: #cf8298;
+  }
+}
+
+/* ---------- Shared layout ---------- */
+
+.page {
+  padding: 40px 32px 64px;
+  text-align: left;
+}
+
+.page-narrow {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  margin: 0;
+}
+
+.section {
+  margin-bottom: 48px;
+}
+
+.section h2 {
+  margin-bottom: 16px;
+}
+
+.muted {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.state-message {
+  padding: 24px 0;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.state-message.is-error {
+  color: var(--status-declined);
+}
+
+/* ---------- Landing ---------- */
+
+.landing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 64px 32px;
+  gap: 8px;
+}
+
+.landing p {
+  color: var(--text);
+  font-size: 17px;
+  margin-bottom: 32px;
+}
+
+.landing-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.landing-actions a {
+  display: block;
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-h);
+  text-decoration: none;
+  font-weight: 500;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.landing-actions a:hover,
+.landing-actions a:focus-visible {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.landing-actions a.secondary {
+  border: none;
+  color: var(--text);
+  font-weight: 400;
+  font-size: 15px;
+  padding: 4px 20px;
+}
+
+.landing-actions a.secondary:hover,
+.landing-actions a.secondary:focus-visible {
+  background: none;
+  color: var(--accent);
+}
+
+/* ---------- Auth forms (Login / Register) ---------- */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.field input,
+.field textarea {
+  font: inherit;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: none;
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.btn {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    opacity 0.15s ease,
+    background 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-h);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.form-note {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.form-note.is-success {
+  color: var(--status-accepted);
+}
+
+.form-note.is-error {
+  color: var(--status-declined);
+}
+
+/* ---------- Search / filter bar (the one bold moment) ---------- */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+}
+
+.filter-bar input {
+  flex: 1 1 160px;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.filter-bar input:focus-visible {
+  outline: none;
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.filter-bar .btn-primary {
+  flex: 0 0 auto;
+  padding: 12px 24px;
+}
+
+/* ---------- Posting / application list rows ---------- */
+
+.row-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.row-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.row-meta {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.row-meta .sep {
+  margin: 0 6px;
+  opacity: 0.5;
+}
+
+.row-side {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* ---------- Status pill ---------- */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-pill[data-status="Submitted"] {
+  color: var(--status-submitted);
+  background: var(--status-submitted-bg);
+}
+
+.status-pill[data-status="UnderReview"] {
+  color: var(--status-review);
+  background: var(--accent-bg);
+}
+
+.status-pill[data-status="Interview"] {
+  color: var(--status-interview);
+  background: var(--status-interview-bg);
+}
+
+.status-pill[data-status="Accepted"] {
+  color: var(--status-accepted);
+  background: var(--status-accepted-bg);
+}
+
+.status-pill[data-status="Declined"] {
+  color: var(--status-declined);
+  background: var(--status-declined-bg);
+}
+
+/* ---------- Dashboard layout + sidebar ---------- */
+
+.dashboard-layout {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+  text-align: left;
+}
+
+.sidebar {
+  flex: 0 0 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 20px;
+  border-right: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.sidebar nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a:focus-visible {
+  background: var(--accent-bg);
+  color: var(--text-h);
+}
+
+.sidebar nav a.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.sidebar button {
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar button:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.dashboard-content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* ---------- Empty state ---------- */
+
+.empty-state {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--text);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+/* Recruiter controls use the same form and row styles as candidate pages. */
+.field select {
+  font: inherit;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.field select:focus-visible {
+  outline: none;
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.field-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.field-checkbox input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-danger,
+.btn-danger:hover {
+  color: var(--status-declined);
+}
+
+.recruiter-page-header,
+.recruiter-row,
+.recruiter-actions {
+  flex-wrap: wrap;
+}
+
+.recruiter-actions {
+  gap: 8px;
+  flex-shrink: 1;
+}
+
+.recruiter-row .row-title {
+  overflow-wrap: anywhere;
+}

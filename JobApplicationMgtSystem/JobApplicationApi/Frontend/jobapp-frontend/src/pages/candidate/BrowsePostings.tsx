@@ -45,7 +45,6 @@ const BrowsePostings = () =>
         loadPostings()
     }, [page, filters]);
 
-    
     const handleFilterSubmit = (e: React.FormEvent) =>
     {
         e.preventDefault();
@@ -59,43 +58,53 @@ const BrowsePostings = () =>
     };
 
     return(
-        <div>
-            <h2>Browse Postings</h2>
+        <div className="page">
+            <div className="page-header">
+                <h2>Browse Postings</h2>
+            </div>
 
-            <form onSubmit={handleFilterSubmit}>
+            <form onSubmit={handleFilterSubmit} className="filter-bar">
                 <input
-                placeholder="Keyword"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
+                    placeholder="Keyword"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
                 />
                 <input
-                placeholder="Location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                    placeholder="Location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
                 />
                 <input
-                placeholder="Employment Type"
-                value={employmentType}
-                onChange={(e) => setEmploymentType(e.target.value)}
+                    placeholder="Employment Type"
+                    value={employmentType}
+                    onChange={(e) => setEmploymentType(e.target.value)}
                 />
-                <button type="submit">Search</button>
+                <button type="submit" className="btn btn-primary">Search</button>
             </form>
 
-            {loading && <p>Loading postings...</p>}
-            {error && <p>{error}</p>}
+            {loading && <p className="state-message">Loading postings...</p>}
+            {error && <p className="state-message is-error">{error}</p>}
             {!loading && !error && postings.length === 0 && (
-                <p>No postings match your search.</p>
+                <div className="empty-state">No postings match your search — try different filters.</div>
             )}
 
-            <ul>
+            <ul className="row-list">
                 {postings.map((posting) => (
-                <li key={posting.id}>
-                    <strong>{posting.title}</strong> — {posting.recruiter?.companyName}
-                    <br />
-                    {posting.location} · {posting.employmentType}
-                    <br />
-                    <button onClick={() => handleApply(posting.id)}>Apply</button>
-                </li>
+                    <li key={posting.id} className="row-item">
+                        <div className="row-main">
+                            <span className="row-title">{posting.title}</span>
+                            <span className="row-meta">
+                                {posting.recruiter?.companyName}
+                                <span className="sep">·</span>
+                                {posting.location}
+                                <span className="sep">·</span>
+                                {posting.employmentType}
+                            </span>
+                        </div>
+                        <div className="row-side">
+                            <button onClick={() => handleApply(posting.id)} className="btn btn-secondary">Apply</button>
+                        </div>
+                    </li>
                 ))}
             </ul>
             <Pagination page={page} totalPages={totalPages} loading={loading} onChange={setPage} />

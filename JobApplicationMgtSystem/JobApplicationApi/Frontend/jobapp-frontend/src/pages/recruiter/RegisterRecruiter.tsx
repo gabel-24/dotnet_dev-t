@@ -70,10 +70,10 @@ function RegisterRecruiter()
   }
 
   return (
-    <div>
+    <div className="page page-narrow">
       <h1>Register as Recruiter</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="field">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -84,7 +84,7 @@ function RegisterRecruiter()
             required
           />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -94,7 +94,7 @@ function RegisterRecruiter()
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -105,7 +105,7 @@ function RegisterRecruiter()
             required
           />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="companyName">Company Name</label>
           <input
             type="text"
@@ -116,7 +116,7 @@ function RegisterRecruiter()
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button className="btn btn-primary" type="submit">Register</button>
       </form>
     </div>
   )

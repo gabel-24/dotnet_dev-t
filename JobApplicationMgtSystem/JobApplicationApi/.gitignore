@@ -1,0 +1,43 @@
+# .NET build output and test results
+[Bb]in/
+[Oo]bj/
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Frontend dependencies and build output
+node_modules/
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# Local configuration (commit sanitized examples instead)
+.env
+.env.*
+.env copy*
+!.env.example
+!.env.*.example
+!.env.template
+!.env.*.template
+appsettings.Development.json
+appsettings.*.local.json
+!appsettings.Development.example.json
+
+# IDE state
+.vs/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.user
+*.suo
+*.userprefs
+*.sln.ide
+
+# Logs and operating-system files
+logs/
+*.log
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

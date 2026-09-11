@@ -2,7 +2,7 @@ import axios from "axios";
 import {clearSession, sessionExpiredEvent} from "../context/session";
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:5182/api",
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

@@ -1,3 +1,4 @@
+import { getAuthErrorMessages } from '../../api/authErrors'
 import { useState } from 'react'
 import axiosClient from '../../api/axiosClient'
 import { useAuth } from '../../context/useAuth'
@@ -14,6 +15,8 @@ function RegisterCandidate()
 {
   const {login } = useAuth()
   const navigate = useNavigate()
+const [errors, setErrors] = useState<string[]>([])
+const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [formData, setFormData] = useState<RegisterCandidateRequest>(
     {
@@ -45,6 +48,8 @@ function RegisterCandidate()
     resumeUrl?: string;
     skills?: string[];
   }) => {
+    setErrors([])
+    setIsSubmitting(true)
     try {
       const response = await axiosClient.post("/auth/register/candidate", data);
 
@@ -55,8 +60,9 @@ function RegisterCandidate()
       navigate("/candidate/dashboard")
 
     } catch (error) {
-      console.error("Registration failed:", error);
-      // next step: show an error message to the user
+      setErrors(getAuthErrorMessages(error))
+    } finally {
+      setIsSubmitting(false)
     }
   };
 
@@ -64,6 +70,11 @@ function RegisterCandidate()
     <div className="page page-narrow">
       <h1>Register as Candidate</h1>
       <form onSubmit={handleSubmit} className="auth-form">
+{errors.length > 0 && (
+  <div className="form-note is-error" role="alert">
+    {errors.map(message => <p key={message}>{message}</p>)}
+  </div>
+)}
         <div className="field">
           <label htmlFor="username">Username</label>
           <input
@@ -81,6 +92,7 @@ function RegisterCandidate()
             type="email"
             id="email"
             name="email"
+            required
             value={formData.email}
             onChange={handleChange}
           />
@@ -91,12 +103,13 @@ function RegisterCandidate()
             type="password"
             id="password"
             name="password"
+            minLength={6}
             value={formData.password}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Register</button>
+        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>{isSubmitting ? "Registering…" : "Register"}</button>
       </form>
     </div>
   )

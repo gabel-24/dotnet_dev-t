@@ -88,4 +88,28 @@ public class AuthControllerTests
 
         Assert.IsType<UnauthorizedObjectResult>(result);
     }
+    [Theory]
+    [InlineData("DuplicateEmail", "Email", 409)]
+    [InlineData("DuplicateUserName", "Username", 409)]
+    [InlineData("PasswordRequiresDigit", "Password", 400)]
+    public async Task Registration_ReturnsSpecificErrors_ForBothRoles(string code, string field, int status)
+    {
+        var failure = new RegistrationException(new[] {
+            new Microsoft.AspNetCore.Identity.IdentityError { Code = code, Description = "Password must contain a digit." }
+        });
+        _authServiceMock.Setup(s => s.RegisterCandidateAsync(It.IsAny<RegisterCandidateDto>())).ThrowsAsync(failure);
+        _authServiceMock.Setup(s => s.RegisterRecruiterAsync(It.IsAny<RegisterRecruiterDto>())).ThrowsAsync(failure);
+
+        var results = new[] {
+            await _controller.RegisterCandidate(new RegisterCandidateDto()),
+            await _controller.RegisterRecruiter(new RegisterRecruiterDto())
+        };
+        foreach (var result in results)
+        {
+            var response = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(status, response.StatusCode);
+            var json = System.Text.Json.JsonSerializer.SerializeToElement(response.Value);
+            Assert.Equal(failure.Errors[field][0], json.GetProperty("errors").GetProperty(field)[0].GetString());
+        }
+    }
 }

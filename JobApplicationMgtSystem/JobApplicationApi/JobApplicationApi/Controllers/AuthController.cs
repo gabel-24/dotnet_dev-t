@@ -16,23 +16,43 @@ public class AuthController : ControllerBase
     [HttpPost("register/candidate")]
     public async Task<IActionResult> RegisterCandidate(RegisterCandidateDto request)
     {
-        var result = await _authService.RegisterCandidateAsync(request);
+        try
+        {
+            var result = await _authService.RegisterCandidateAsync(request);
+            if (result == null)
+                return BadRequest(new { message = "Registration failed. Please check your details and try again." });
 
-        if (result == null)
-            return BadRequest("Registration failed. Email may already be in use or password does not meet requirements.");
-
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (RegistrationException exception)
+        {
+            return StatusCode(exception.IsDuplicate ? 409 : 400, new
+            {
+                message = exception.Message,
+                errors = exception.Errors
+            });
+        }
     }
 
     [HttpPost("register/recruiter")]
     public async Task<IActionResult> RegisterRecruiter(RegisterRecruiterDto request)
     {
-        var result = await _authService.RegisterRecruiterAsync(request);
+        try
+        {
+            var result = await _authService.RegisterRecruiterAsync(request);
+            if (result == null)
+                return BadRequest(new { message = "Registration failed. Please check your details and try again." });
 
-        if (result == null)
-            return BadRequest("Registration failed. Email may already be in use or password does not meet requirements.");
-
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (RegistrationException exception)
+        {
+            return StatusCode(exception.IsDuplicate ? 409 : 400, new
+            {
+                message = exception.Message,
+                errors = exception.Errors
+            });
+        }
     }
 
     [HttpPost("login")]
@@ -41,7 +61,7 @@ public class AuthController : ControllerBase
         var result = await _authService.LoginAsync(request);
 
         if (result == null)
-            return Unauthorized("Invalid email or password.");
+            return Unauthorized(new { message = "Invalid email or password." });
 
         return Ok(result);
     }

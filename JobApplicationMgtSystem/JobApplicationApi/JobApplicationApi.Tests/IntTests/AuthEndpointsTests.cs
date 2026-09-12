@@ -37,7 +37,7 @@ public class AuthEndpointsTests : IClassFixture<CustomWebApplicationFactory>
     }
 
     [Fact]
-    public async Task RegisterCandidate_ReturnsBadRequest_WhenEmailAlreadyExists()
+    public async Task RegisterCandidate_ReturnsConflict_WhenEmailAlreadyExists()
     {
         var request = new RegisterCandidateDto
         {
@@ -50,7 +50,7 @@ public class AuthEndpointsTests : IClassFixture<CustomWebApplicationFactory>
         await _client.PostAsJsonAsync("/api/auth/register/candidate", request);
         var secondResponse = await _client.PostAsJsonAsync("/api/auth/register/candidate", request);
 
-        Assert.Equal(HttpStatusCode.BadRequest, secondResponse.StatusCode);
+        Assert.Equal(HttpStatusCode.Conflict, secondResponse.StatusCode);
     }
 
     [Fact]

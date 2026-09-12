@@ -41,15 +41,7 @@ public class AuthService : IAuthService
         var result = await _userManager.CreateAsync(user, request.Password);
 
         if (!result.Succeeded)
-        {
-            foreach (var error in result.Errors)
-            {
-                Console.WriteLine($"Identity error: {error.Code} - {error.Description}");
-            }
-            return null;
-            
-        }
-            
+            throw new RegistrationException(result.Errors);
 
         await _userManager.AddToRoleAsync(user, "Candidate");
 
@@ -85,7 +77,7 @@ public class AuthService : IAuthService
         var result = await _userManager.CreateAsync(user, request.Password);
 
         if (!result.Succeeded)
-            return null;
+            throw new RegistrationException(result.Errors);
 
         await _userManager.AddToRoleAsync(user, "Recruiter");
 

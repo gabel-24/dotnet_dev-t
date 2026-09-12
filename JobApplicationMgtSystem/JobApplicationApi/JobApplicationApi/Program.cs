@@ -48,6 +48,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
+options.User.RequireUniqueEmail = true;
 options.Password.RequiredLength = 6;
 options.Password.RequireNonAlphanumeric = false;
 })

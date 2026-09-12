@@ -1,3 +1,4 @@
+import { getAuthErrorMessages } from '../../api/authErrors'
 import { useState } from 'react'
 import { useAuth } from '../../context/useAuth'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +16,8 @@ function RegisterRecruiter()
 {
   const {login} = useAuth()
   const navigate = useNavigate()
+const [errors, setErrors] = useState<string[]>([])
+const [isSubmitting, setIsSubmitting] = useState(false)
   
   const [formData, setFormData] = useState<RegisterRecruiterRequest>(
   {
@@ -54,8 +57,9 @@ function RegisterRecruiter()
     }
   ) =>
   {
-    try
-    {
+    setErrors([])
+    setIsSubmitting(true)
+    try {
       const response = await axiosClient.post("/auth/register/recruiter", data)
       const {token, userId, userName, role} = response.data
 
@@ -65,7 +69,9 @@ function RegisterRecruiter()
     }
     catch(error)
     {
-      console.error("Registration failed:", error)
+      setErrors(getAuthErrorMessages(error))
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -73,6 +79,11 @@ function RegisterRecruiter()
     <div className="page page-narrow">
       <h1>Register as Recruiter</h1>
       <form onSubmit={handleSubmit} className="auth-form">
+{errors.length > 0 && (
+  <div className="form-note is-error" role="alert">
+    {errors.map(message => <p key={message}>{message}</p>)}
+  </div>
+)}
         <div className="field">
           <label htmlFor="username">Username</label>
           <input
@@ -90,6 +101,7 @@ function RegisterRecruiter()
             type="email"
             id="email"
             name="email"
+            required
             value={formData.email}
             onChange={handleChange}
           />
@@ -100,6 +112,7 @@ function RegisterRecruiter()
             type="password"
             id="password"
             name="password"
+            minLength={6}
             value={formData.password}
             onChange={handleChange}
             required
@@ -116,7 +129,7 @@ function RegisterRecruiter()
             required
           />
         </div>
-        <button className="btn btn-primary" type="submit">Register</button>
+        <button className="btn btn-primary" type="submit" disabled={isSubmitting}>{isSubmitting ? "Registering…" : "Register"}</button>
       </form>
     </div>
   )
